@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Campus Recruitment System</string>
+    <string name="select_role">Select Role</string>
+    <string name="image_description">Image Description</string>
+
+    <string-array name="roles">
+        <item>Select a Role</item>
+        <item>Student</item>
+        <item>Recruiter</item>
+    </string-array>
+</resources>

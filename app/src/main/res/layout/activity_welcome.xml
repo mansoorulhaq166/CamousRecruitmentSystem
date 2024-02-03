@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_color"
+    tools:context=".ui.WelcomeActivity">
+
+    <ImageView
+        android:id="@+id/welcome_icon"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_120sdp"
+        android:contentDescription="@string/image_description"
+        android:src="@drawable/app_icon" />
+
+    <TextView
+        android:id="@+id/button_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/welcome_icon"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_64sdp"
+        android:background="@drawable/login_bg"
+        android:fontFamily="@font/poppins_regular"
+        android:padding="@dimen/_8sdp"
+        android:text="Login"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_18ssp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/button_signup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button_login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:background="@drawable/sign_up_bg"
+        android:fontFamily="@font/poppins_regular"
+        android:padding="@dimen/_8sdp"
+        android:text="Sign Up"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_18ssp"
+        android:textStyle="bold" />
+</RelativeLayout>
