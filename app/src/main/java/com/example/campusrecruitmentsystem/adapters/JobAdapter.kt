@@ -6,9 +6,16 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.campusrecruitmentsystem.R
+import com.example.campusrecruitmentsystem.listeners.OnItemClickListener
 import com.example.campusrecruitmentsystem.models.Job
 
 class JobAdapter(private val jobs: List<Job>) : RecyclerView.Adapter<JobAdapter.ViewHolder>() {
+
+    private var onItemClickListener: OnItemClickListener? = null
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        onItemClickListener = listener
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.job_item, parent, false)
@@ -24,6 +31,7 @@ class JobAdapter(private val jobs: List<Job>) : RecyclerView.Adapter<JobAdapter.
         holder.salaryTextView.text = job.salary
         holder.locationTextView.text = job.location
         holder.criteriaTextView.text = job.criteria
+
     }
 
     override fun getItemCount(): Int {
@@ -38,6 +46,13 @@ class JobAdapter(private val jobs: List<Job>) : RecyclerView.Adapter<JobAdapter.
         val locationTextView: TextView = itemView.findViewById(R.id.textViewLocation)
         val criteriaTextView: TextView = itemView.findViewById(R.id.textViewCriteria)
 
-        // Add more TextViews for other job details
+        init {
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    onItemClickListener?.onItemClick(position)
+                }
+            }
+        }
     }
 }

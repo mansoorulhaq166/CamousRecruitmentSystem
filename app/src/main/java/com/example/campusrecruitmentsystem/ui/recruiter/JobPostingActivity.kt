@@ -1,5 +1,6 @@
-package com.example.campusrecruitmentsystem.ui
+package com.example.campusrecruitmentsystem.ui.recruiter
 
+import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -7,11 +8,16 @@ import android.widget.Toast
 import com.example.campusrecruitmentsystem.databinding.ActivityJobPostingBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class JobPostingActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var binding: ActivityJobPostingBinding
+    private val calendar: Calendar = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,6 +25,9 @@ class JobPostingActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         auth = FirebaseAuth.getInstance()
+        binding.editTextJobDeadline.setOnClickListener {
+            showDatePickerDialog()
+        }
 
         binding.btnPostJob.setOnClickListener {
             val jobTitle = binding.editTextJobTitle.text.toString().trim()
@@ -27,6 +36,7 @@ class JobPostingActivity : AppCompatActivity() {
             val jobLocation = binding.editTextJobLocation.text.toString().trim()
             val criteria = binding.editTextEligibilityCriteria.text.toString().trim()
             val companyName = binding.editTextCompanyName.text.toString().trim()
+            val deadline = binding.editTextJobDeadline.text.toString().trim()
 
             binding.jobTitleLayout.error = null
             binding.companyNameLayout.error = null
@@ -34,6 +44,7 @@ class JobPostingActivity : AppCompatActivity() {
             binding.jobSalaryLayout.error = null
             binding.jobLocationLayout.error = null
             binding.jobCriteriaLayout.error = null
+            binding.editTextJobDeadline.error = null
 
             if (jobTitle.isEmpty()) {
                 binding.jobTitleLayout.error = "Job Title cannot be empty"
@@ -47,6 +58,8 @@ class JobPostingActivity : AppCompatActivity() {
                 binding.jobLocationLayout.error = "Job Location cannot be empty"
             } else if (criteria.isEmpty()) {
                 binding.jobCriteriaLayout.error = "Eligibility Criteria cannot be empty"
+            } else if (deadline.isEmpty()) {
+                binding.jobDeadlineLayout.error = "Deadline cannot be empty"
             } else {
                 binding.btnPostJob.visibility = View.GONE
                 binding.progressBar.visibility = View.VISIBLE
@@ -61,6 +74,7 @@ class JobPostingActivity : AppCompatActivity() {
                         "location" to jobLocation,
                         "criteria" to criteria,
                         "company" to companyName,
+                        "deadline" to deadline,
                         "recruiter_id" to userId
                     )
 
@@ -68,7 +82,7 @@ class JobPostingActivity : AppCompatActivity() {
                     if (jobId != null) {
                         val jobsReference =
                             FirebaseDatabase.getInstance().getReference("jobs").child(jobId)
-
+                        job["id"] = jobId
                         jobsReference.setValue(job)
                             .addOnCompleteListener { jobTask ->
                                 if (jobTask.isSuccessful) {
@@ -101,5 +115,32 @@ class JobPostingActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun showDatePickerDialog() {
+        val datePicker = DatePickerDialog(
+            this,
+            { _, year, month, dayOfMonth ->
+                // Update your UI with the selected date
+                val selectedDate = Calendar.getInstance()
+                selectedDate.set(year, month, dayOfMonth)
+                updateDeadline(selectedDate.time)
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+
+        // Set minimum date (optional)
+        datePicker.datePicker.minDate = System.currentTimeMillis() - 1000
+
+        // Show the date picker dialog
+        datePicker.show()
+    }
+
+    private fun updateDeadline(selectedDate: Date) {
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        val formattedDate = dateFormat.format(selectedDate)
+        binding.editTextJobDeadline.setText(formattedDate)
     }
 }

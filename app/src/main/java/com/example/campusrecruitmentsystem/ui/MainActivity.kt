@@ -3,8 +3,16 @@ package com.example.campusrecruitmentsystem.ui
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.campusrecruitmentsystem.databinding.ActivityMainBinding
+import com.example.campusrecruitmentsystem.ui.recruiter.AppliedApplicationsActivity
+import com.example.campusrecruitmentsystem.ui.recruiter.JobPostingActivity
+import com.example.campusrecruitmentsystem.ui.recruiter.JobsPostedActivity
+import com.example.campusrecruitmentsystem.ui.recruiter.NotificationsActivity
+import com.example.campusrecruitmentsystem.ui.student.JobBrowsingActivity
+import com.example.campusrecruitmentsystem.ui.student.JobsAppliedActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -52,12 +60,19 @@ class MainActivity : AppCompatActivity() {
                     when (snapshot.child("role").getValue(String::class.java)) {
                         "Recruiter" -> {
                             binding.buttonPostJob.visibility = View.VISIBLE
+                            binding.buttonJobsPosted.visibility = View.VISIBLE
+                            binding.buttonApplications.visibility = View.VISIBLE
                             binding.buttonBrowseJobs.visibility = View.GONE
+                            binding.buttonAppliedJobs.visibility = View.GONE
                         }
 
                         "Student" -> {
                             binding.buttonPostJob.visibility = View.GONE
+                            binding.buttonJobsPosted.visibility = View.GONE
+                            binding.buttonApplications.visibility = View.GONE
+                            binding.imgNotification.visibility = View.GONE
                             binding.buttonBrowseJobs.visibility = View.VISIBLE
+                            binding.buttonAppliedJobs.visibility = View.VISIBLE
                         }
                     }
                 }
@@ -71,13 +86,55 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this@MainActivity, JobPostingActivity::class.java))
         }
 
+        binding.buttonJobsPosted.setOnClickListener {
+            startActivity(Intent(this@MainActivity, JobsPostedActivity::class.java))
+        }
+
+        binding.buttonApplications.setOnClickListener {
+            startActivity(Intent(this@MainActivity, AppliedApplicationsActivity::class.java))
+        }
+
         binding.buttonBrowseJobs.setOnClickListener {
             startActivity(Intent(this@MainActivity, JobBrowsingActivity::class.java))
         }
 
-        binding.llLogout.setOnClickListener {
-            logoutUser()
+        binding.buttonAppliedJobs.setOnClickListener {
+            startActivity(Intent(this@MainActivity, JobsAppliedActivity::class.java))
         }
+
+        binding.imgNotification.setOnClickListener {
+            startActivity(Intent(this@MainActivity, NotificationsActivity::class.java))
+        }
+
+        binding.llLogout.setOnClickListener {
+            showLogoutConfirmationDialog()
+        }
+
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                finishAffinity()
+            }
+        }
+
+        onBackPressedDispatcher.addCallback(this, callback)
+    }
+
+    private fun showLogoutConfirmationDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Logout")
+        builder.setMessage("Are you sure you want to logout?")
+
+        builder.setPositiveButton("Yes") { dialog, _ ->
+            logoutUser()
+            dialog.dismiss()
+        }
+
+        builder.setNegativeButton("No") { dialog, _ ->
+            dialog.dismiss()
+        }
+
+        val dialog = builder.create()
+        dialog.show()
     }
 
     private fun logoutUser() {

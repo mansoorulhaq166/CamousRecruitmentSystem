@@ -18,17 +18,59 @@
         android:textStyle="bold"
         android:visibility="gone" />
 
+    <ImageView
+        android:id="@+id/imgNotification"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:src="@drawable/baseline_notifications_24" />
+
     <TextView
         android:id="@+id/buttonPostJob"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_above="@id/buttonJobsPosted"
         android:layout_marginHorizontal="@dimen/_16sdp"
         android:background="@drawable/login_bg"
         android:fontFamily="@font/poppins_regular"
         android:gravity="center"
         android:paddingVertical="@dimen/_6sdp"
         android:text="Post a Job"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_18ssp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/buttonJobsPosted"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginHorizontal="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:background="@drawable/login_bg"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center"
+        android:paddingVertical="@dimen/_6sdp"
+        android:text="Jobs Posted"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_18ssp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/buttonApplications"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonJobsPosted"
+        android:layout_marginHorizontal="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:background="@drawable/login_bg"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center"
+        android:paddingVertical="@dimen/_6sdp"
+        android:text="Job Applications"
         android:textColor="@color/white"
         android:textSize="@dimen/_18ssp"
         android:visibility="gone" />
@@ -44,6 +86,22 @@
         android:gravity="center"
         android:paddingVertical="@dimen/_6sdp"
         android:text="Browse Jobs"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_18ssp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/buttonAppliedJobs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonBrowseJobs"
+        android:layout_marginHorizontal="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:background="@drawable/login_bg"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center"
+        android:paddingVertical="@dimen/_6sdp"
+        android:text="Applied Jobs"
         android:textColor="@color/white"
         android:textSize="@dimen/_18ssp"
         android:visibility="gone" />
