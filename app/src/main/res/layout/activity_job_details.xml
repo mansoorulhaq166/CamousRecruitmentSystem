@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/button_color"
@@ -12,7 +13,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:fontFamily="@font/poppins_regular"
-        android:text="Job Title"
         android:textColor="@color/white"
         android:textSize="@dimen/_18ssp"
         android:textStyle="bold" />
@@ -25,7 +25,6 @@
         android:layout_marginTop="@dimen/_8sdp"
         android:alpha="0.6"
         android:fontFamily="@font/poppins_regular"
-        android:text="Deadline"
         android:textColor="@color/white"
         android:textSize="@dimen/_12ssp"
         android:textStyle="bold" />
@@ -36,7 +35,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
         android:fontFamily="@font/poppins_regular"
-        android:text="Company Name"
         android:textColor="@color/white"
         android:textSize="@dimen/_14ssp"
         android:textStyle="bold" />
@@ -47,7 +45,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
         android:fontFamily="@font/poppins_regular"
-        android:text="Location"
         android:textColor="@color/white"
         android:textSize="@dimen/_14ssp"
         android:textStyle="bold" />
@@ -58,7 +55,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
         android:fontFamily="@font/poppins_regular"
-        android:text="Description"
         android:textColor="@color/white"
         android:textSize="@dimen/_14ssp"
         android:textStyle="bold" />
@@ -69,7 +65,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
         android:fontFamily="@font/poppins_regular"
-        android:text="Salary"
         android:textColor="@color/white"
         android:textSize="@dimen/_14ssp"
         android:textStyle="bold" />
@@ -80,7 +75,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
         android:fontFamily="@font/poppins_regular"
-        android:text="Eligibility Criteria"
         android:textColor="@color/white"
         android:textSize="@dimen/_14ssp"
         android:textStyle="bold" />
@@ -90,14 +84,23 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_16sdp">
 
-        <ProgressBar
+        <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:indeterminate="true"
-            android:indeterminateTint="@color/white"
-            android:indeterminateTintMode="src_atop"
+            android:visibility="gone"
+            app:indicatorColor="@color/white" />
+
+        <TextView
+            android:id="@+id/progress_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/progress_bar"
+            android:layout_centerInParent="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="bold"
             android:visibility="gone" />
 
         <TextView
@@ -107,7 +110,6 @@
             android:background="@drawable/login_bg"
             android:fontFamily="@font/poppins_regular"
             android:paddingVertical="@dimen/_4sdp"
-            android:text="Apply Now"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="@dimen/_18ssp"

@@ -10,6 +10,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import com.example.campusrecruitmentsystem.R
 import com.example.campusrecruitmentsystem.databinding.ActivityJobDetailsBinding
 import com.example.campusrecruitmentsystem.models.ApplicationDetails
 import com.example.campusrecruitmentsystem.models.Job
@@ -43,12 +45,12 @@ class JobDetailsActivity : AppCompatActivity() {
             binding.textViewCriteria.text = job!!.criteria
         }
 
-        binding.btnApply.setOnClickListener {
-            chooseResumeFile()
-        }
-
         // Checking if the student has already applied for this job
         checkJobStatus()
+
+        binding.btnApply.setOnClickListener {
+            showApplicationSubmissionDialog()
+        }
     }
 
     private fun checkJobStatus() {
@@ -61,25 +63,22 @@ class JobDetailsActivity : AppCompatActivity() {
         studentQuery.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(studentSnapshot: DataSnapshot) {
                 if (studentSnapshot.exists()) {
-                    val jobQuery = applicationReference.orderByChild("jobId").equalTo(jobId)
-                    jobQuery.addListenerForSingleValueEvent(object : ValueEventListener {
-                        override fun onDataChange(jobSnapshot: DataSnapshot) {
-                            if (jobSnapshot.exists()) {
-                                // Student has applied for this specific job
-                                binding.btnApply.text = "Applied"
-                                binding.btnApply.isEnabled = false
-                            } else {
-                                binding.btnApply.text = "Apply Now"
-                                binding.btnApply.isEnabled = true
-                            }
-                        }
+                    val applied = studentSnapshot.children.any { studentApplication ->
+                        val applicationJobId = studentApplication.child("jobId").getValue(String::class.java)
+                        applicationJobId == jobId
+                    }
 
-                        override fun onCancelled(error: DatabaseError) {
-                            Log.e("TAG", "Failed to read job application data.", error.toException())
-                        }
-                    })
+                    if (applied) {
+                        // Student has applied for this specific job
+                        binding.btnApply.text = getString(R.string.applied)
+                        binding.btnApply.isEnabled = false
+                    } else {
+                        // Student has not applied for this specific job
+                        binding.btnApply.text = getString(R.string.apply_now)
+                        binding.btnApply.isEnabled = true
+                    }
                 } else {
-                    binding.btnApply.text = "Apply Now"
+                    binding.btnApply.text = getString(R.string.apply_now)
                     binding.btnApply.isEnabled = true
                 }
             }
@@ -103,13 +102,17 @@ class JobDetailsActivity : AppCompatActivity() {
 
         if (requestCode == 123 && resultCode == Activity.RESULT_OK) {
             val selectedFileUri: Uri? = data?.data
-            uploadResumeToFirebaseStorage(selectedFileUri)
+            binding.btnApply.text = getString(R.string.submit_application)
+            binding.btnApply.setOnClickListener {
+                uploadResumeToFirebaseStorage(selectedFileUri)
+            }
         }
     }
 
     private fun uploadResumeToFirebaseStorage(fileUri: Uri?) {
         binding.btnApply.visibility = View.GONE
         binding.progressBar.visibility = View.VISIBLE
+        binding.progressText.visibility = View.VISIBLE
         if (fileUri != null) {
             val storageRef = FirebaseStorage.getInstance().reference
             val resumeRef =
@@ -117,7 +120,14 @@ class JobDetailsActivity : AppCompatActivity() {
 
             val uploadTask = resumeRef.putFile(fileUri)
 
-            uploadTask.addOnSuccessListener { taskSnapshot ->
+            uploadTask.addOnProgressListener { taskSnapshot ->
+                val progress =
+                    (100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount).toInt()
+
+                // Update the progress bar
+                binding.progressText.text = getString(R.string.upload_progress, progress)
+                binding.progressBar.progress = progress
+            }.addOnSuccessListener { taskSnapshot ->
                 taskSnapshot.storage.downloadUrl.addOnSuccessListener { uri ->
                     val downloadUrl = uri.toString()
                     // Storing the download URL and other details in the Firebase Database
@@ -200,5 +210,20 @@ class JobDetailsActivity : AppCompatActivity() {
                 callback(null)
             }
         })
+    }
+
+    private fun showApplicationSubmissionDialog() {
+        val alertDialogBuilder = AlertDialog.Builder(this)
+        alertDialogBuilder.setTitle("Application Submission")
+        alertDialogBuilder.setMessage("Before submitting your application, please ensure you've uploaded your latest resume or cover letter.")
+        alertDialogBuilder.setPositiveButton("Upload Now") { dialog, _ ->
+            chooseResumeFile()
+            dialog.dismiss()
+        }
+        alertDialogBuilder.setNegativeButton("Cancel") { dialog, _ ->
+            dialog.dismiss()
+        }
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
     }
 }

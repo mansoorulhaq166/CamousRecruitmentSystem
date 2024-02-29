@@ -96,6 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="@dimen/_16sdp"
+                android:visibility="gone"
                 android:fontFamily="@font/poppins_regular"
                 android:text="Forgot Password?"
                 android:textColor="@color/white"

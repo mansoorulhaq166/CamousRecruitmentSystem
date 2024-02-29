@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity() {
                             binding.buttonApplications.visibility = View.VISIBLE
                             binding.buttonBrowseJobs.visibility = View.GONE
                             binding.buttonAppliedJobs.visibility = View.GONE
+                            binding.imgNotification.visibility = View.VISIBLE
                         }
 
                         "Student" -> {
@@ -106,6 +107,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this@MainActivity, NotificationsActivity::class.java))
         }
 
+        binding.llProfile.setOnClickListener {
+            startActivity(Intent(this@MainActivity, ProfileActivity::class.java))
+        }
         binding.llLogout.setOnClickListener {
             showLogoutConfirmationDialog()
         }

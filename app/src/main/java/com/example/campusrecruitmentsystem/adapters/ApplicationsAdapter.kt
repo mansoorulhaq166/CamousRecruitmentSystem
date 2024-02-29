@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +19,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import java.io.File
-import java.io.FileOutputStream
 
 class ApplicationsAdapter(private val appliedApplications: List<ApplicationDetails>) :
     RecyclerView.Adapter<ApplicationsAdapter.ViewHolder>() {
@@ -31,6 +29,7 @@ class ApplicationsAdapter(private val appliedApplications: List<ApplicationDetai
         val textViewApplicationDate: TextView = itemView.findViewById(R.id.textViewApplicationDate)
         val btnDownloadResume: TextView = itemView.findViewById(R.id.btnDownloadResume)
         val progressBar: CircularProgressIndicator = itemView.findViewById(R.id.progress_bar)
+        val progressText: TextView = itemView.findViewById(R.id.progress_text)
         var userId: String? = null
     }
 
@@ -124,6 +123,7 @@ class ApplicationsAdapter(private val appliedApplications: List<ApplicationDetai
         holder: ViewHolder
     ) {
         holder.progressBar.visibility = View.VISIBLE
+        holder.progressText.visibility = View.VISIBLE
         holder.btnDownloadResume.visibility = View.GONE
 
         val storageRef = FirebaseStorage.getInstance().getReferenceFromUrl(resumeUrl)
@@ -135,27 +135,28 @@ class ApplicationsAdapter(private val appliedApplications: List<ApplicationDetai
         )
 
         try {
-            val outputStream = FileOutputStream(file)
+//            val outputStream = FileOutputStream(file)
             storageRef.getFile(file)
                 .addOnSuccessListener {
                     Toast.makeText(context, "File downloaded successfully", Toast.LENGTH_SHORT)
                         .show()
                     holder.progressBar.visibility = View.GONE
+                    holder.progressText.visibility = View.GONE
                     holder.btnDownloadResume.visibility = View.VISIBLE
                 }
                 .addOnFailureListener { exception ->
                     Toast.makeText(context, "Failed to download resume", Toast.LENGTH_SHORT).show()
                     exception.printStackTrace()
                     holder.progressBar.visibility = View.GONE
+                    holder.progressText.visibility = View.GONE
                     holder.btnDownloadResume.visibility = View.VISIBLE
                 }
                 .addOnProgressListener { taskSnapshot ->
                     val progress =
                         (100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount).toInt()
-                    holder.progressBar.progress = progress
 
-                    Log.d("TAG", "downloadResume: $progress")
-                    // Update progress if needed
+                    holder.progressText.text = context.getString(R.string.upload_progress, progress)
+                    holder.progressBar.progress = progress
                 }
         } catch (e: Exception) {
             e.printStackTrace()

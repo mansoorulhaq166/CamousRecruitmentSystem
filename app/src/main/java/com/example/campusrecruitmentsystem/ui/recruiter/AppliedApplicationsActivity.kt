@@ -3,6 +3,7 @@ package com.example.campusrecruitmentsystem.ui.recruiter
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -59,6 +60,15 @@ class AppliedApplicationsActivity : AppCompatActivity() {
                 binding.recyclerview.layoutManager = layoutManager
                 val adapter = ApplicationsAdapter(filteredApplications)
                 binding.recyclerview.adapter = adapter
+
+                binding.progressBar.visibility = View.GONE
+                binding.textViewNoApplications.visibility = View.GONE
+
+                if (filteredApplications.isEmpty()) {
+                    binding.textViewNoApplications.visibility = View.VISIBLE
+                } else {
+                    binding.textViewNoApplications.visibility = View.GONE
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {

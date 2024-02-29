@@ -3,6 +3,11 @@
     <string name="select_role">Select Role</string>
     <string name="image_description">Image Description</string>
 
+    <string name="apply_now">Apply Now</string>
+    <string name="applied">Applied</string>
+    <string name="submit_application">Submit Application</string>
+    <string name="upload_progress">%1$d%%</string>
+
     <string-array name="roles">
         <item>Select a Role</item>
         <item>Student</item>

@@ -5,28 +5,35 @@
     android:layout_height="match_parent"
     android:background="@color/app_color">
 
-    <TextView
-        android:id="@+id/textViewGreeting"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:fontFamily="@font/seoul_hangang_cb"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_20ssp"
-        android:textStyle="bold"
-        android:visibility="gone" />
+        android:background="@color/button_color"
+        android:padding="@dimen/_8sdp">
 
-    <ImageView
-        android:id="@+id/imgNotification"
-        android:layout_width="@dimen/_24sdp"
-        android:layout_height="@dimen/_24sdp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:layout_marginEnd="@dimen/_8sdp"
-        android:src="@drawable/baseline_notifications_24" />
+        <TextView
+            android:id="@+id/textViewGreeting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/seoul_hangang_cb"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_20ssp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/imgNotification"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:visibility="gone"
+            android:contentDescription="@string/image_description"
+            android:src="@drawable/baseline_notifications_24" />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/buttonPostJob"
