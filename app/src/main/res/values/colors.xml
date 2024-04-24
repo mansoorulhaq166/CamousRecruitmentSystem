@@ -5,4 +5,7 @@
 
     <color name="app_color">#7B72DF</color>
     <color name="button_color">#245684</color>
+
+    <color name="colorTrue">#4CAF50</color> <!-- Green -->
+    <color name="colorFalse">#F44336</color> <!-- Red -->
 </resources>

@@ -83,6 +83,22 @@
         android:visibility="gone" />
 
     <TextView
+        android:id="@+id/buttonCreateTest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonApplications"
+        android:layout_marginHorizontal="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:background="@drawable/login_bg"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center"
+        android:paddingVertical="@dimen/_6sdp"
+        android:text="Create Test"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_18ssp"
+        android:visibility="gone" />
+
+    <TextView
         android:id="@+id/buttonBrowseJobs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

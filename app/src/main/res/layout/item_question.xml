@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/app_color"
+    android:orientation="vertical"
+    android:padding="@dimen/_16sdp">
+
+    <!-- Question Text -->
+    <EditText
+        android:id="@+id/editTextQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter your question"
+        android:inputType="textMultiLine"
+        android:textColor="@color/white"
+        android:maxLines="3" />
+
+    <!-- Question Type (Spinner/Dropdown) -->
+    <Spinner
+        android:id="@+id/spinnerQuestionType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:entries="@array/question_types" />
+
+    <!-- Options (for Multiple Choice Questions) -->
+    <LinearLayout
+        android:id="@+id/layoutOptions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical">
+
+        <!-- Add EditTexts dynamically based on the number of options -->
+        <!-- You can add or remove options as needed -->
+
+    </LinearLayout>
+
+    <!-- Correct Option (for Multiple Choice Questions) -->
+    <Spinner
+        android:id="@+id/spinnerCorrectOption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:entries="@array/options"
+        android:visibility="gone" />
+
+    <!-- Add or Remove Question Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/btnAddOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/login_bg"
+            android:paddingHorizontal="@dimen/_16sdp"
+            android:paddingVertical="@dimen/_8sdp"
+            android:text="Add Option"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp" />
+
+        <TextView
+            android:id="@+id/btnRemoveOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:background="@drawable/login_bg"
+            android:paddingHorizontal="@dimen/_16sdp"
+            android:paddingVertical="@dimen/_8sdp"
+            android:text="Remove Option"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp" />
+
+    </LinearLayout>
+
+</LinearLayout>

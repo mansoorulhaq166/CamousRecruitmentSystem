@@ -19,6 +19,24 @@
         android:theme="@style/Theme.CampusRecruitmentSystem"
         tools:targetApi="31">
         <activity
+            android:name=".ui.recruiter.test.ShortAnswerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.recruiter.test.TrueFalseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.recruiter.test.MultipleChoiceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.recruiter.test.CreationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.recruiter.test.TestCreationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.recruiter.CreateTestActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.ProfileActivity"
             android:exported="false" />
         <activity

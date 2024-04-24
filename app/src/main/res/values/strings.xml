@@ -7,10 +7,23 @@
     <string name="applied">Applied</string>
     <string name="submit_application">Submit Application</string>
     <string name="upload_progress">%1$d%%</string>
+    <string name="select_question_type">Select Question Type</string>
 
     <string-array name="roles">
         <item>Select a Role</item>
         <item>Student</item>
         <item>Recruiter</item>
+    </string-array>
+
+    <string-array name="question_types">
+        <item>Multiple Choice</item>
+        <item>True/False</item>
+        <item>Short Answer</item>
+    </string-array>
+
+    <string-array name="options">
+        <item>Option 1</item>
+        <item>Option 2</item>
+        <!-- Add more options as needed -->
     </string-array>
 </resources>
