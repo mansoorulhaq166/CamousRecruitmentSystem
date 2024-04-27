@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.campusrecruitmentsystem.adapters.TrueFalseAdapter
+import com.example.campusrecruitmentsystem.adapters.test.TrueFalseAdapter
 import com.example.campusrecruitmentsystem.databinding.ActivityTrueFalseBinding
-import com.example.campusrecruitmentsystem.ui.MainActivity
+import com.example.campusrecruitmentsystem.ui.main.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -22,6 +22,9 @@ class TrueFalseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTrueFalseBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val testName = intent.getStringExtra("testName").toString()
+        val testTime = intent.getStringExtra("testTime").toString()
 
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().reference.child("tests").child("TrueFalseTests")
@@ -38,7 +41,7 @@ class TrueFalseActivity : AppCompatActivity() {
         }
 
         binding.btnSaveTest.setOnClickListener {
-            saveTestToFirebase()
+            saveTestToFirebase(testName, testTime)
         }
     }
 
@@ -47,22 +50,21 @@ class TrueFalseActivity : AppCompatActivity() {
         trueFalseAdapter.addQuestion(questionNumber)
     }
 
-    private fun saveTestToFirebase() {
-        val testName = binding.etTestName.text.toString().trim()
+    private fun saveTestToFirebase(testName: String, testTime: String) {
         val questions = trueFalseAdapter.getQuestions()
         val testId = database.push().key
         val userId = auth.currentUser?.uid
+        val creationTime = System.currentTimeMillis()
         val test = mapOf(
             "userId" to userId,
+            "creationTime" to creationTime,
             "testName" to testName,
+            "testTime" to testTime,
             "questions" to trueFalseAdapter.getQuestions()
         )
 
-        if (testName.isEmpty()) {
-            return
-        }
-
         if (questions.isEmpty()) {
+            Toast.makeText(this, "Please Enter Test Questions", Toast.LENGTH_SHORT).show()
             return
         }
         testId?.let {

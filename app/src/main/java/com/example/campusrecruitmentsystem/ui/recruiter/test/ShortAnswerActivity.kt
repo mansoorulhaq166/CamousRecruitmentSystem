@@ -3,29 +3,28 @@ package com.example.campusrecruitmentsystem.ui.recruiter.test
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.campusrecruitmentsystem.R
-import com.example.campusrecruitmentsystem.adapters.TrueFalseAdapter
-import com.example.campusrecruitmentsystem.databinding.ActivityTrueFalseBinding
-import com.example.campusrecruitmentsystem.ui.MainActivity
+import com.example.campusrecruitmentsystem.adapters.test.TrueFalseAdapter
+import com.example.campusrecruitmentsystem.databinding.ActivityShortAnswerBinding
+import com.example.campusrecruitmentsystem.ui.main.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class ShortAnswerActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityTrueFalseBinding
+    private lateinit var binding: ActivityShortAnswerBinding
     private val questionsList = mutableListOf<String>()
     private lateinit var trueFalseAdapter: TrueFalseAdapter
     private lateinit var database: DatabaseReference
     private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityTrueFalseBinding.inflate(layoutInflater)
+        binding = ActivityShortAnswerBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val testName = intent.getStringExtra("testName").toString()
+        val testTime = intent.getStringExtra("testTime").toString()
 
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().reference.child("tests").child("ShortAnswerTests")
@@ -42,7 +41,7 @@ class ShortAnswerActivity : AppCompatActivity() {
         }
 
         binding.btnSaveTest.setOnClickListener {
-            saveTestToFirebase()
+            saveTestToFirebase(testName, testTime)
         }
     }
 
@@ -51,22 +50,21 @@ class ShortAnswerActivity : AppCompatActivity() {
         trueFalseAdapter.addQuestion(questionNumber)
     }
 
-    private fun saveTestToFirebase() {
-        val testName = binding.etTestName.text.toString().trim()
+    private fun saveTestToFirebase(testName: String, testTime: String) {
         val questions = trueFalseAdapter.getQuestions()
         val testId = database.push().key
         val userId = auth.currentUser?.uid
+        val creationTime = System.currentTimeMillis()
         val test = mapOf(
             "userId" to userId,
+            "creationTime" to creationTime,
             "testName" to testName,
+            "testTime" to testTime,
             "questions" to trueFalseAdapter.getQuestions()
         )
 
-        if (testName.isEmpty()) {
-            return
-        }
-
         if (questions.isEmpty()) {
+            Toast.makeText(this, "Please Enter Test Questions", Toast.LENGTH_SHORT).show()
             return
         }
         testId?.let {

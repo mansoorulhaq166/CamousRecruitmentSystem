@@ -15,7 +15,7 @@ import com.example.campusrecruitmentsystem.R
 import com.example.campusrecruitmentsystem.databinding.ActivityJobDetailsBinding
 import com.example.campusrecruitmentsystem.models.ApplicationDetails
 import com.example.campusrecruitmentsystem.models.Job
-import com.example.campusrecruitmentsystem.ui.MainActivity
+import com.example.campusrecruitmentsystem.ui.main.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError

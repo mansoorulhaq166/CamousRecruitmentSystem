@@ -1,6 +1,5 @@
-package com.example.campusrecruitmentsystem.adapters
+package com.example.campusrecruitmentsystem.adapters.test
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

@@ -1,4 +1,4 @@
-package com.example.campusrecruitmentsystem.ui
+package com.example.campusrecruitmentsystem.ui.main
 
 import android.content.Intent
 import android.os.Bundle

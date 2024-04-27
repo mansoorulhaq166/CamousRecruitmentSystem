@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SpinnerPopupStyle" parent="Widget.AppCompat.PopupWindow">
+        <item name="android:popupBackground">@drawable/spinner_dropdown_bg</item>
+    </style>
+</resources>

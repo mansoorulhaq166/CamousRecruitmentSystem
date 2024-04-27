@@ -35,7 +35,7 @@ class ApplicationsAdapter(private val appliedApplications: List<ApplicationDetai
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.single_item_applied_application, parent, false)
+            .inflate(R.layout.item_applied_application, parent, false)
         return ViewHolder(view)
     }
 

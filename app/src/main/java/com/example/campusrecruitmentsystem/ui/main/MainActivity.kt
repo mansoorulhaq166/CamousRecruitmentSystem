@@ -1,4 +1,4 @@
-package com.example.campusrecruitmentsystem.ui
+package com.example.campusrecruitmentsystem.ui.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,11 +8,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.campusrecruitmentsystem.databinding.ActivityMainBinding
 import com.example.campusrecruitmentsystem.ui.recruiter.AppliedApplicationsActivity
-import com.example.campusrecruitmentsystem.ui.recruiter.CreateTestActivity
 import com.example.campusrecruitmentsystem.ui.recruiter.JobPostingActivity
 import com.example.campusrecruitmentsystem.ui.recruiter.JobsPostedActivity
 import com.example.campusrecruitmentsystem.ui.recruiter.NotificationsActivity
-import com.example.campusrecruitmentsystem.ui.recruiter.test.TestCreationActivity
+import com.example.campusrecruitmentsystem.ui.recruiter.TestManagementActivity
 import com.example.campusrecruitmentsystem.ui.student.JobBrowsingActivity
 import com.example.campusrecruitmentsystem.ui.student.JobsAppliedActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -64,7 +63,7 @@ class MainActivity : AppCompatActivity() {
                             binding.buttonPostJob.visibility = View.VISIBLE
                             binding.buttonJobsPosted.visibility = View.VISIBLE
                             binding.buttonApplications.visibility = View.VISIBLE
-                            binding.buttonCreateTest.visibility = View.VISIBLE
+                            binding.buttonTestManagement.visibility = View.VISIBLE
                             binding.buttonBrowseJobs.visibility = View.GONE
                             binding.buttonAppliedJobs.visibility = View.GONE
                             binding.imgNotification.visibility = View.VISIBLE
@@ -99,8 +98,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this@MainActivity, AppliedApplicationsActivity::class.java))
         }
 
-        binding.buttonCreateTest.setOnClickListener {
-            startActivity(Intent(this@MainActivity, TestCreationActivity::class.java))
+        binding.buttonTestManagement.setOnClickListener {
+            startActivity(Intent(this@MainActivity, TestManagementActivity::class.java))
         }
 
         binding.buttonBrowseJobs.setOnClickListener {

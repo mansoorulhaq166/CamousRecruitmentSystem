@@ -3,6 +3,7 @@ package com.example.campusrecruitmentsystem.ui.recruiter.test
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.campusrecruitmentsystem.databinding.ActivityTestCreationBinding
 
@@ -20,6 +21,26 @@ class TestCreationActivity : AppCompatActivity() {
 
         binding.btnNext.setOnClickListener {
             val selectedType = binding.spinnerQuestionType.selectedItem.toString()
+            val manualTimeInput = binding.etManualTime.text.toString().trim()
+            val testName = binding.etTestName.text.toString().trim()
+
+            if (testName.isEmpty()) {
+                Toast.makeText(
+                    this@TestCreationActivity,
+                    "Test Name cannot be empty",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
+
+            if (manualTimeInput.isEmpty()) {
+                Toast.makeText(
+                    this@TestCreationActivity,
+                    "Test Time cannot be empty",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
             val intent = when (selectedType) {
                 "Multiple Choice" -> Intent(
                     this@TestCreationActivity,
@@ -30,9 +51,13 @@ class TestCreationActivity : AppCompatActivity() {
                 "Short Answer" -> Intent(this@TestCreationActivity, ShortAnswerActivity::class.java)
                 else -> null
             }
-            intent?.let {
-                startActivity(it)
+
+            intent?.apply {
+                putExtra("testTime", manualTimeInput)
+                putExtra("testName", testName)
+                startActivity(this)
             }
+
         }
     }
 }
