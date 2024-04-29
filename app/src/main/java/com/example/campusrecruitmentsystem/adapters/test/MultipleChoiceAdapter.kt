@@ -8,7 +8,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.campusrecruitmentsystem.R
-import com.example.campusrecruitmentsystem.models.MultipleChoiceQuestion
+import com.example.campusrecruitmentsystem.models.recruiter.MultipleChoiceQuestion
 
 class MultipleChoiceAdapter(private val questions: MutableList<MultipleChoiceQuestion>) :
     RecyclerView.Adapter<MultipleChoiceAdapter.ViewHolder>() {

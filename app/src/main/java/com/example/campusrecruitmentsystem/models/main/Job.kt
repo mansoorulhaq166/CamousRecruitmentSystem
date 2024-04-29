@@ -1,4 +1,4 @@
-package com.example.campusrecruitmentsystem.models
+package com.example.campusrecruitmentsystem.models.main
 
 import android.os.Parcel
 import android.os.Parcelable

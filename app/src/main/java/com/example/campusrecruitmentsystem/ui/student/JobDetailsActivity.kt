@@ -5,24 +5,30 @@ import android.app.Activity
 import android.content.Intent
 import android.icu.text.SimpleDateFormat
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.example.campusrecruitmentsystem.R
 import com.example.campusrecruitmentsystem.databinding.ActivityJobDetailsBinding
-import com.example.campusrecruitmentsystem.models.ApplicationDetails
-import com.example.campusrecruitmentsystem.models.Job
+import com.example.campusrecruitmentsystem.models.main.ApplicationDetails
+import com.example.campusrecruitmentsystem.models.main.Job
 import com.example.campusrecruitmentsystem.ui.main.MainActivity
+import com.example.campusrecruitmentsystem.ui.student.test.StudentTestActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
+import java.util.Calendar
 import java.util.Date
+import java.util.Locale
 
 class JobDetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityJobDetailsBinding
@@ -38,19 +44,70 @@ class JobDetailsActivity : AppCompatActivity() {
         if (job != null) {
             binding.textViewJobTitle.text = job!!.title
             binding.textViewCompany.text = job!!.company
-            binding.textViewDeadline.text = job!!.deadline
             binding.textViewLocation.text = job!!.location
             binding.textViewDescription.text = job!!.description
             binding.textViewSalary.text = job!!.salary
             binding.textViewCriteria.text = job!!.criteria
+
+            val deadlineDateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            val deadlineDate = deadlineDateFormat.parse(job?.deadline ?: "")
+            val currentTime = Calendar.getInstance().time
+
+            val timeDifference = deadlineDate?.time?.minus(currentTime.time) ?: 0
+
+            object : CountDownTimer(timeDifference, 1000) {
+                override fun onTick(millisUntilFinished: Long) {
+                    val days = millisUntilFinished / (1000 * 60 * 60 * 24)
+                    val hours = (millisUntilFinished % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+                    val minutes = (millisUntilFinished % (1000 * 60 * 60)) / (1000 * 60)
+                    val seconds = (millisUntilFinished % (1000 * 60)) / 1000
+
+                    val countdownText = "$days d, $hours h, $minutes m, $seconds s"
+                    binding.textViewDeadlineCount.text = countdownText
+                }
+
+                override fun onFinish() {
+                    binding.textViewDeadlineCount.text = "Application Deadline Reached"
+                }
+            }.start()
+        }
+
+        binding.btnApply.setOnClickListener {
+            showCustomApplicationSubmissionDialog()
+        }
+
+        binding.backJobDetails.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+
+        binding.btnTakeTest.setOnClickListener {
+            startActivity(Intent(this@JobDetailsActivity, StudentTestActivity::class.java))
         }
 
         // Checking if the student has already applied for this job
         checkJobStatus()
 
-        binding.btnApply.setOnClickListener {
-            showApplicationSubmissionDialog()
-        }
+        checkAvailableTests()
+    }
+
+    private fun checkAvailableTests() {
+        val jobId = job?.id
+        val testRefs = FirebaseDatabase.getInstance().getReference("tests")
+        val studentQuery = testRefs.orderByChild("jobId").equalTo(jobId)
+
+        studentQuery.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(studentSnapshot: DataSnapshot) {
+                if (studentSnapshot.exists()) {
+                    binding.btnTakeTest.visibility = View.VISIBLE
+                } else {
+                    binding.btnTakeTest.visibility = View.GONE
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("TAG", "Failed To read Test Data.", error.toException())
+            }
+        })
     }
 
     private fun checkJobStatus() {
@@ -145,18 +202,19 @@ class JobDetailsActivity : AppCompatActivity() {
 
         getRecruiterId(jobId) { recruiterId ->
             if (recruiterId != null) {
-                val application = ApplicationDetails(
-                    jobId = jobId,
-                    studentId = studentId,
-                    recruiterId = recruiterId,
-                    resumeUrl = downloadUrl,
-                    applicationDate = getCurrentDate()
-                )
-
                 val databaseReference = FirebaseDatabase.getInstance().getReference("applications")
                 val applicationId = databaseReference.push().key
 
                 if (applicationId != null) {
+                    val application = ApplicationDetails(
+                        applicationId = applicationId,
+                        jobId = jobId,
+                        studentId = studentId,
+                        recruiterId = recruiterId,
+                        resumeUrl = downloadUrl,
+                        applicationDate = getCurrentDate()
+                    )
+
                     databaseReference.child(applicationId).setValue(application)
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
@@ -212,18 +270,25 @@ class JobDetailsActivity : AppCompatActivity() {
         })
     }
 
-    private fun showApplicationSubmissionDialog() {
+    private fun showCustomApplicationSubmissionDialog() {
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_apply_submission, null)
+
         val alertDialogBuilder = AlertDialog.Builder(this)
-        alertDialogBuilder.setTitle("Application Submission")
-        alertDialogBuilder.setMessage("Before submitting your application, please ensure you've uploaded your latest resume or cover letter.")
-        alertDialogBuilder.setPositiveButton("Upload Now") { dialog, _ ->
-            chooseResumeFile()
-            dialog.dismiss()
-        }
-        alertDialogBuilder.setNegativeButton("Cancel") { dialog, _ ->
-            dialog.dismiss()
-        }
+        alertDialogBuilder.setView(dialogView)
+
         val alertDialog = alertDialogBuilder.create()
+        val btnUploadNow = dialogView.findViewById<TextView>(R.id.button_upload)
+        val btnCancel = dialogView.findViewById<TextView>(R.id.button_cancel)
+
+        btnUploadNow.setOnClickListener {
+            chooseResumeFile()
+            alertDialog.dismiss()
+        }
+
+        btnCancel.setOnClickListener {
+            alertDialog.dismiss()
+        }
+
         alertDialog.show()
     }
 }

@@ -14,6 +14,7 @@ import com.example.campusrecruitmentsystem.ui.recruiter.NotificationsActivity
 import com.example.campusrecruitmentsystem.ui.recruiter.TestManagementActivity
 import com.example.campusrecruitmentsystem.ui.student.JobBrowsingActivity
 import com.example.campusrecruitmentsystem.ui.student.JobsAppliedActivity
+import com.example.campusrecruitmentsystem.ui.student.TakeTestActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -75,6 +76,7 @@ class MainActivity : AppCompatActivity() {
                             binding.buttonApplications.visibility = View.GONE
                             binding.imgNotification.visibility = View.GONE
                             binding.buttonBrowseJobs.visibility = View.VISIBLE
+                            binding.buttonTakeTest.visibility = View.VISIBLE
                             binding.buttonAppliedJobs.visibility = View.VISIBLE
                         }
                     }
@@ -105,7 +107,9 @@ class MainActivity : AppCompatActivity() {
         binding.buttonBrowseJobs.setOnClickListener {
             startActivity(Intent(this@MainActivity, JobBrowsingActivity::class.java))
         }
-
+        binding.buttonTakeTest.setOnClickListener {
+            startActivity(Intent(this@MainActivity, TakeTestActivity::class.java))
+        }
         binding.buttonAppliedJobs.setOnClickListener {
             startActivity(Intent(this@MainActivity, JobsAppliedActivity::class.java))
         }

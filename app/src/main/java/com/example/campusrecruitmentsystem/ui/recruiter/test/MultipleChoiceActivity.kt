@@ -3,13 +3,12 @@ package com.example.campusrecruitmentsystem.ui.recruiter.test
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.campusrecruitmentsystem.adapters.test.MultipleChoiceAdapter
 import com.example.campusrecruitmentsystem.databinding.ActivityMultipleChoiceBinding
-import com.example.campusrecruitmentsystem.models.MultipleChoiceQuestion
+import com.example.campusrecruitmentsystem.models.recruiter.MultipleChoiceQuestion
 import com.example.campusrecruitmentsystem.ui.main.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -28,10 +27,10 @@ class MultipleChoiceActivity : AppCompatActivity() {
 
         val testName = intent.getStringExtra("testName").toString()
         val testTime = intent.getStringExtra("testTime").toString()
+        val testJob = intent.getStringExtra("testJob").toString()
 
         auth = FirebaseAuth.getInstance()
-        database =
-            FirebaseDatabase.getInstance().reference.child("tests").child("MultipleChoiceTests")
+        database = FirebaseDatabase.getInstance().reference.child("tests")
 
         binding.rvQuestions.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -45,7 +44,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
         }
 
         binding.btnSaveTest.setOnClickListener {
-            saveTestToFirebase(testName, testTime)
+            saveTestToFirebase(testName, testTime, testJob)
         }
     }
 
@@ -54,7 +53,7 @@ class MultipleChoiceActivity : AppCompatActivity() {
         multipleChoiceAdapter.addQuestion(questionNumber)
     }
 
-    private fun saveTestToFirebase(testName: String, testTime: String) {
+    private fun saveTestToFirebase(testName: String, testTime: String, testJob: String) {
         val questions = multipleChoiceAdapter.getQuestions()
         for (question in questions) {
             if (question.question.isEmpty()) {
@@ -77,12 +76,15 @@ class MultipleChoiceActivity : AppCompatActivity() {
         val testId = database.push().key
         val userId = auth.currentUser?.uid
         val creationTime = System.currentTimeMillis()
+        val testType = "Multiple Choice"
         val test = mapOf(
             "userId" to userId,
             "creationTime" to creationTime,
+            "jobId" to testJob,
             "testName" to testName,
             "testTime" to testTime,
-            "questions" to questions
+            "testType" to testType,
+            "questions" to questions,
         )
 
         testId?.let {

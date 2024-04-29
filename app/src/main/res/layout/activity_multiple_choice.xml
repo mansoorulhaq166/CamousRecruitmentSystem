@@ -7,12 +7,16 @@
     android:padding="@dimen/_8sdp"
     tools:context=".ui.recruiter.test.TrueFalseActivity">
 
-    <Button
+    <TextView
         android:id="@+id/btn_save_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
+        android:background="@drawable/apply_job_bg"
+        android:paddingHorizontal="@dimen/_16sdp"
+        android:paddingVertical="@dimen/_4sdp"
+        android:fontFamily="@font/poppins_regular"
         android:text="Save Test"
         android:textColor="@color/white"
         android:textSize="@dimen/_16ssp"
@@ -28,13 +32,17 @@
         android:layout_marginVertical="@dimen/_8sdp" />
 
     <!-- Add Question Button -->
-    <Button
+    <TextView
         android:id="@+id/btn_add_question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:text="Add Question"
+        android:background="@drawable/apply_job_bg"
+        android:paddingHorizontal="@dimen/_16sdp"
+        android:paddingVertical="@dimen/_4sdp"
+        android:fontFamily="@font/poppins_regular"
         android:textColor="@color/white"
         android:textSize="@dimen/_16ssp"
         android:textStyle="bold" />

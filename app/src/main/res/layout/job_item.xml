@@ -39,15 +39,15 @@
         android:textSize="@dimen/_14ssp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textViewDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_regular"
-        android:text="Description"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_14ssp"
-        android:textStyle="bold" />
+<!--    <TextView-->
+<!--        android:id="@+id/textViewDescription"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:fontFamily="@font/poppins_regular"-->
+<!--        android:text="Description"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textSize="@dimen/_14ssp"-->
+<!--        android:textStyle="bold" />-->
 
     <TextView
         android:id="@+id/textViewSalary"
@@ -60,15 +60,26 @@
         android:textStyle="bold"
         />
 
+<!--    <TextView-->
+<!--        android:id="@+id/textViewCriteria"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Eligibility Criteria"-->
+<!--        android:textSize="@dimen/_14ssp"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:fontFamily="@font/poppins_regular"-->
+<!--        android:textStyle="bold"-->
+<!--        />-->
+
     <TextView
-        android:id="@+id/textViewCriteria"
+        android:id="@+id/textViewDeadlineDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Eligibility Criteria"
-        android:textSize="@dimen/_14ssp"
+        android:layout_gravity="end"
+        android:textSize="@dimen/_12ssp"
         android:textColor="@color/white"
+        android:alpha="0.7"
         android:fontFamily="@font/poppins_regular"
-        android:textStyle="bold"
         />
 
 </LinearLayout>

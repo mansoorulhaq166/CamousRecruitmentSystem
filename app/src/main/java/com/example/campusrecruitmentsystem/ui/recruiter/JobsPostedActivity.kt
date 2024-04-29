@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.campusrecruitmentsystem.adapters.JobAdapter
 import com.example.campusrecruitmentsystem.databinding.ActivityJobsPostedBinding
-import com.example.campusrecruitmentsystem.models.Job
+import com.example.campusrecruitmentsystem.models.main.Job
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -23,22 +23,26 @@ class JobsPostedActivity : AppCompatActivity() {
     private lateinit var database: DatabaseReference
     private lateinit var currentUser: FirebaseUser
     private lateinit var postedJobs: MutableList<Job>
-    private lateinit var jobAdapter:JobAdapter
+    private lateinit var jobAdapter: JobAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityJobsPostedBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val fromTest = intent.getBooleanExtra("fromTest", false)
         auth = FirebaseAuth.getInstance()
         currentUser = auth.currentUser!!
         database = FirebaseDatabase.getInstance().reference
         postedJobs = mutableListOf()
 
         binding.recyclerViewPostedJobs.layoutManager = LinearLayoutManager(this)
-        jobAdapter = JobAdapter(postedJobs)
+        jobAdapter = JobAdapter(postedJobs, fromTest, this@JobsPostedActivity)
         binding.recyclerViewPostedJobs.adapter = jobAdapter
 
+        binding.backJobsPosted.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
         fetchPostedJobs()
     }
 

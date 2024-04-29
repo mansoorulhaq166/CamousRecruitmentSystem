@@ -7,44 +7,122 @@
     android:background="@color/app_color"
     tools:context=".ui.recruiter.test.TestCreationActivity">
 
-    <EditText
-        android:id="@+id/et_test_name"
+    <RelativeLayout
+        android:id="@+id/rl_top_test_selection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/et_manual_time"
+        android:layout_alignParentTop="true"
+        android:background="@color/button_color"
+        android:padding="@dimen/_8sdp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/seoul_hangang_cb"
+            android:text="Test Selection"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_20ssp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/back_test_selection"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:contentDescription="@string/image_description"
+            android:src="@drawable/baseline_arrow_back_ios_24" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/btn_select_job"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/testNameLayout"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_16sdp"
+        android:background="@drawable/apply_job_bg"
+        android:fontFamily="@font/poppins_regular"
+        android:paddingHorizontal="@dimen/_16sdp"
+        android:paddingVertical="@dimen/_5sdp"
+        android:text="Select Job"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_18ssp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/selected_job_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/btn_select_job"
+        android:layout_above="@id/testNameLayout"
+        android:fontFamily="@font/seoul_hangang_cb"
+        android:layout_marginBottom="@dimen/_24sdp"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:paddingHorizontal="@dimen/_32sdp"
+        android:paddingVertical="@dimen/_4sdp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_14ssp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/testNameLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/testTimeLayout"
         android:layout_marginHorizontal="@dimen/_16sdp"
         android:layout_marginBottom="@dimen/_16sdp"
-        android:background="@drawable/edit_text_bg"
-        android:hint="Enter Test Name"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:padding="@dimen/_8sdp"
-        android:textColor="@color/white"
-        android:textColorHint="#90ffffff"
-        android:textSize="@dimen/_16ssp" />
+        app:boxStrokeColor="@color/white"
+        app:boxStrokeWidthFocused="2dp"
+        app:hintTextColor="@color/white">
 
-    <EditText
-        android:id="@+id/et_manual_time"
+        <EditText
+            android:id="@+id/editTextTestName"
+            style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Enter Test Name"
+            android:importantForAutofill="no"
+            android:inputType="textNoSuggestions"
+            android:shadowColor="@color/white"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="bold" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/testTimeLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginHorizontal="@dimen/_16sdp"
-        android:background="@drawable/edit_text_bg"
-        android:hint="Enter Time (sec), default(0)"
-        android:importantForAutofill="no"
-        android:inputType="number"
-        android:padding="@dimen/_8sdp"
-        android:text="0"
-        android:textColor="@color/white"
-        android:textColorHint="#90ffffff"
-        android:textSize="@dimen/_16ssp"
-        android:textStyle="bold" />
+        app:boxStrokeColor="@color/white"
+        app:boxStrokeWidthFocused="2dp"
+        app:hintTextColor="@color/white">
+
+        <EditText
+            android:id="@+id/etTestTime"
+            style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Enter Time (sec), default(0)"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:shadowColor="@color/white"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="bold" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Spinner
         android:id="@+id/spinner_question_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/et_manual_time"
+        android:layout_below="@id/testTimeLayout"
         android:layout_marginHorizontal="@dimen/_16sdp"
         android:layout_marginTop="@dimen/_16sdp"
         android:background="@drawable/login_bg"
@@ -69,8 +147,9 @@
         android:layout_marginTop="@dimen/_16sdp"
         android:layout_marginEnd="@dimen/_16sdp"
         android:background="@drawable/sign_up_bg"
-        android:paddingHorizontal="@dimen/_16sdp"
-        android:paddingVertical="@dimen/_8sdp"
+        android:fontFamily="@font/poppins_regular"
+        android:paddingHorizontal="@dimen/_32sdp"
+        android:paddingVertical="@dimen/_4sdp"
         android:text="Next"
         android:textColor="@color/white"
         android:textSize="@dimen/_18ssp"

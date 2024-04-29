@@ -14,6 +14,9 @@ class TestManagementActivity : AppCompatActivity() {
         binding = ActivityTestManagementBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.backCreateTest.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
         binding.btnCreateTest.setOnClickListener {
             startActivity(Intent(this@TestManagementActivity, TestCreationActivity::class.java))
         }

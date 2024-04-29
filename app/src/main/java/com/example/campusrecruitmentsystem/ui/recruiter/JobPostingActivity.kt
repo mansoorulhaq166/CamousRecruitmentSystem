@@ -29,6 +29,10 @@ class JobPostingActivity : AppCompatActivity() {
             showDatePickerDialog()
         }
 
+        binding.backJobPosting.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+
         binding.btnPostJob.setOnClickListener {
             val jobTitle = binding.editTextJobTitle.text.toString().trim()
             val jobDescription = binding.editTextJobDescription.text.toString().trim()
@@ -100,7 +104,7 @@ class JobPostingActivity : AppCompatActivity() {
                                     binding.editTextJobLocation.text.clear()
                                     binding.editTextEligibilityCriteria.text.clear()
 
-                                    binding.editTextJobTitle.requestFocus()
+                                    finish()
                                 } else {
                                     Toast.makeText(
                                         this,

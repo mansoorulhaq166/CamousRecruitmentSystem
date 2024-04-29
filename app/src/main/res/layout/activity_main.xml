@@ -101,7 +101,7 @@
         android:id="@+id/buttonBrowseJobs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_above="@id/buttonTakeTest"
         android:layout_marginHorizontal="@dimen/_16sdp"
         android:background="@drawable/login_bg"
         android:fontFamily="@font/poppins_regular"
@@ -111,12 +111,26 @@
         android:textColor="@color/white"
         android:textSize="@dimen/_18ssp"
         android:visibility="gone" />
-
+    <TextView
+        android:id="@+id/buttonTakeTest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginHorizontal="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:background="@drawable/login_bg"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center"
+        android:paddingVertical="@dimen/_6sdp"
+        android:text="Take Available Test"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_18ssp"
+        android:visibility="gone" />
     <TextView
         android:id="@+id/buttonAppliedJobs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/buttonBrowseJobs"
+        android:layout_below="@id/buttonTakeTest"
         android:layout_marginHorizontal="@dimen/_16sdp"
         android:layout_marginTop="@dimen/_12sdp"
         android:background="@drawable/login_bg"
@@ -158,7 +172,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/image_description"
-                android:src="@drawable/baseline_home_24" />
+                android:src="@drawable/home_selected" />
 
             <TextView
                 android:layout_width="wrap_content"

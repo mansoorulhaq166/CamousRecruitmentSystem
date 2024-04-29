@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_color"
+    tools:context=".ui.recruiter.ApplicationDetailsActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_application_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/button_color"
+        android:padding="@dimen/_8sdp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/seoul_hangang_cb"
+            android:text="Application Details"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_20ssp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/back_app_details"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:contentDescription="@string/image_description"
+            android:src="@drawable/baseline_arrow_back_ios_24" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_application_details"
+        android:padding="@dimen/_16sdp">
+
+        <TextView
+            android:id="@+id/textViewApplicantDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:text="Applicant Details: "
+            android:textColor="@color/white"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="@dimen/_18ssp"
+            android:textStyle="bold" />
+
+        <!-- Name -->
+        <TextView
+            android:id="@+id/textViewName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewApplicantDetails"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:text="Name: John Doe"
+            android:textColor="@color/white"
+            android:fontFamily="@font/seoul_hangang_cb"
+            android:textStyle="bold"
+            android:textSize="@dimen/_16ssp" />
+
+        <!-- Contact Information -->
+        <TextView
+            android:id="@+id/textViewContactNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewName"
+            android:visibility="gone"
+            android:textColor="@color/white"
+            android:fontFamily="@font/seoul_hangang_cb"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:text="Contact Information: john.doe@example.com"
+            android:textSize="@dimen/_16ssp" />
+
+        <TextView
+            android:id="@+id/textViewContactEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewContactNumber"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:text="Contact Information: john.doe@example.com"
+            android:textColor="@color/white"
+            android:fontFamily="@font/seoul_hangang_cb"
+            android:textStyle="bold"
+            android:textSize="@dimen/_16ssp" />
+
+        <!-- Additional Documents -->
+        <TextView
+            android:id="@+id/textViewAdditionalDocs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewContactEmail"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:text="Additional Documents: Cover Letter"
+            android:textColor="@color/white"
+            android:fontFamily="@font/seoul_hangang_cb"
+            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:textSize="@dimen/_16ssp" />
+
+        <!-- Job Application Details Section -->
+        <TextView
+            android:id="@+id/textViewJobAppDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewAdditionalDocs"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:text="Job Application Details: "
+            android:textColor="@color/white"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="@dimen/_18ssp"
+            android:textStyle="bold" />
+
+        <!-- Application Date -->
+        <TextView
+            android:id="@+id/textViewApplicationDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewJobAppDetails"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/seoul_hangang_cb"
+            android:textStyle="bold"
+            android:textSize="@dimen/_16ssp" />
+
+        <!-- Application Status -->
+        <TextView
+            android:id="@+id/textViewAppStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewApplicationDate"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:text="Status: Pending"
+            android:textColor="@color/white"
+            android:fontFamily="@font/seoul_hangang_cb"
+            android:textStyle="bold"
+            android:textSize="@dimen/_16ssp" />
+
+        <!-- Notes or Comments -->
+        <TextView
+            android:id="@+id/textViewNotes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewAppStatus"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:text="Notes/Comments:"
+            android:textColor="@color/white"
+            android:fontFamily="@font/seoul_hangang_cb"
+            android:textStyle="bold"
+            android:textSize="@dimen/_16ssp" />
+
+        <!-- Interview Schedule and Feedback -->
+        <TextView
+            android:id="@+id/textViewInterview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewNotes"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:text="Interview Schedule and Feedback"
+            android:textColor="@color/white"
+            android:fontFamily="@font/seoul_hangang_cb"
+            android:textStyle="bold"
+            android:textSize="@dimen/_16ssp" />
+
+        <!-- Action Buttons -->
+        <Button
+            android:id="@+id/btnAccept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewInterview"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:background="@drawable/login_bg"
+            android:text="Accept"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btnReject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewInterview"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_toEndOf="@id/btnAccept"
+            android:background="@drawable/login_bg"
+            android:text="Reject"
+            android:textColor="@color/white" />
+
+        <!-- Internal Notes -->
+        <TextView
+            android:id="@+id/textViewInternalNotes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btnAccept"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:text="Internal Notes:"
+            android:textColor="@color/white"
+            android:fontFamily="@font/seoul_hangang_cb"
+            android:textStyle="bold"
+            android:textSize="@dimen/_16ssp" />
+    </RelativeLayout>
+</RelativeLayout>

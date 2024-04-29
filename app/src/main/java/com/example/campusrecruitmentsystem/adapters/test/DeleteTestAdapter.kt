@@ -1,18 +1,17 @@
 package com.example.campusrecruitmentsystem.adapters.test
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.campusrecruitmentsystem.databinding.ItemDeleteTestBinding
 import com.example.campusrecruitmentsystem.listeners.TestItemClickListener
-import com.example.campusrecruitmentsystem.models.Test
+import com.example.campusrecruitmentsystem.models.recruiter.Test
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class TestAdapter(private val testList: MutableList<Test>) :
-    RecyclerView.Adapter<TestAdapter.ViewHolder>() {
+class DeleteTestAdapter(private val testList: MutableList<Test>) :
+    RecyclerView.Adapter<DeleteTestAdapter.ViewHolder>() {
     private var itemClickListener: TestItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

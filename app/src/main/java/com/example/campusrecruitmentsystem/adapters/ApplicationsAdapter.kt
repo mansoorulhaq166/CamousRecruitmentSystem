@@ -1,6 +1,7 @@
 package com.example.campusrecruitmentsystem.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,7 +11,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.campusrecruitmentsystem.R
-import com.example.campusrecruitmentsystem.models.ApplicationDetails
+import com.example.campusrecruitmentsystem.models.main.ApplicationDetails
+import com.example.campusrecruitmentsystem.ui.recruiter.ApplicationDetailsActivity
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -28,6 +30,7 @@ class ApplicationsAdapter(private val appliedApplications: List<ApplicationDetai
         val textViewJobTitle: TextView = itemView.findViewById(R.id.textViewJobTitle)
         val textViewApplicationDate: TextView = itemView.findViewById(R.id.textViewApplicationDate)
         val btnDownloadResume: TextView = itemView.findViewById(R.id.btnDownloadResume)
+        val btnViewDetails: TextView = itemView.findViewById(R.id.btnViewDetails)
         val progressBar: CircularProgressIndicator = itemView.findViewById(R.id.progress_bar)
         val progressText: TextView = itemView.findViewById(R.id.progress_text)
         var userId: String? = null
@@ -59,6 +62,11 @@ class ApplicationsAdapter(private val appliedApplications: List<ApplicationDetai
 
         holder.textViewApplicationDate.text = appliedApplication.applicationDate
 
+        holder.btnViewDetails.setOnClickListener {
+            val intent = Intent(holder.itemView.context, ApplicationDetailsActivity::class.java)
+            intent.putExtra("application", appliedApplication.applicationId)
+            holder.itemView.context.startActivity(intent)
+        }
         holder.btnDownloadResume.setOnClickListener {
             val resumeUrl = appliedApplication.resumeUrl
 

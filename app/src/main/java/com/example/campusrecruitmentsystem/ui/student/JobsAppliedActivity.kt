@@ -7,8 +7,8 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.campusrecruitmentsystem.adapters.JobAdapter
 import com.example.campusrecruitmentsystem.databinding.ActivityJobsAppliedBinding
-import com.example.campusrecruitmentsystem.models.ApplicationDetails
-import com.example.campusrecruitmentsystem.models.Job
+import com.example.campusrecruitmentsystem.models.main.ApplicationDetails
+import com.example.campusrecruitmentsystem.models.main.Job
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -37,9 +37,12 @@ class JobsAppliedActivity : AppCompatActivity() {
         jobsList = mutableListOf()
 
         binding.recyclerViewAppliedJobs.layoutManager = LinearLayoutManager(this)
-        jobAdapter = JobAdapter(jobsList)
+        jobAdapter = JobAdapter(jobsList, false, this@JobsAppliedActivity)
         binding.recyclerViewAppliedJobs.adapter = jobAdapter
 
+        binding.backJobsApplied.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
         fetchAppliedJobs()
     }
 

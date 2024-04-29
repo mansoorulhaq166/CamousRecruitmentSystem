@@ -25,9 +25,10 @@ class TrueFalseActivity : AppCompatActivity() {
 
         val testName = intent.getStringExtra("testName").toString()
         val testTime = intent.getStringExtra("testTime").toString()
+        val testJob = intent.getStringExtra("testJob").toString()
 
         auth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance().reference.child("tests").child("TrueFalseTests")
+        database = FirebaseDatabase.getInstance().reference.child("tests")
 
         binding.rvQuestions.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -41,7 +42,7 @@ class TrueFalseActivity : AppCompatActivity() {
         }
 
         binding.btnSaveTest.setOnClickListener {
-            saveTestToFirebase(testName, testTime)
+            saveTestToFirebase(testName, testTime, testJob)
         }
     }
 
@@ -50,16 +51,19 @@ class TrueFalseActivity : AppCompatActivity() {
         trueFalseAdapter.addQuestion(questionNumber)
     }
 
-    private fun saveTestToFirebase(testName: String, testTime: String) {
+    private fun saveTestToFirebase(testName: String, testTime: String, testJob: String) {
         val questions = trueFalseAdapter.getQuestions()
         val testId = database.push().key
         val userId = auth.currentUser?.uid
         val creationTime = System.currentTimeMillis()
+        val testType = "True/False"
         val test = mapOf(
             "userId" to userId,
             "creationTime" to creationTime,
+            "jobId" to testJob,
             "testName" to testName,
             "testTime" to testTime,
+            "testType" to testType,
             "questions" to trueFalseAdapter.getQuestions()
         )
 

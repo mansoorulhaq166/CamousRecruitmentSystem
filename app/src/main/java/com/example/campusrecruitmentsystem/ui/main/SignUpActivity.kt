@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.example.campusrecruitmentsystem.R
 import com.example.campusrecruitmentsystem.databinding.ActivitySignUpBinding
-import com.example.campusrecruitmentsystem.models.User
+import com.example.campusrecruitmentsystem.models.main.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 

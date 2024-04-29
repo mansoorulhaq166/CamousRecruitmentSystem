@@ -1,4 +1,4 @@
-package com.example.campusrecruitmentsystem.models
+package com.example.campusrecruitmentsystem.models.recruiter
 
 data class MultipleChoiceQuestion(
     var question: String,

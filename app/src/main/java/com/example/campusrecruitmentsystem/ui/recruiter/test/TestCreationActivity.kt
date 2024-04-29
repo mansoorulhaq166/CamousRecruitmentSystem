@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.campusrecruitmentsystem.databinding.ActivityTestCreationBinding
+import com.example.campusrecruitmentsystem.ui.recruiter.JobsPostedActivity
 
 class TestCreationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTestCreationBinding
@@ -14,6 +15,16 @@ class TestCreationActivity : AppCompatActivity() {
         binding = ActivityTestCreationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val jobSelectedSt = intent.getStringExtra("jobId")
+        val jobTitleSt = intent.getStringExtra("jobTitle")
+
+        if (jobTitleSt != null) {
+            binding.selectedJobTitle.text = jobTitleSt
+        }
+        binding.backTestSelection.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+
         val questionTypes = arrayOf("Multiple Choice", "True/False", "Short Answer")
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, questionTypes)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -21,8 +32,8 @@ class TestCreationActivity : AppCompatActivity() {
 
         binding.btnNext.setOnClickListener {
             val selectedType = binding.spinnerQuestionType.selectedItem.toString()
-            val manualTimeInput = binding.etManualTime.text.toString().trim()
-            val testName = binding.etTestName.text.toString().trim()
+            var manualTimeInput = binding.etTestTime.text.toString().trim()
+            val testName = binding.editTextTestName.text.toString().trim()
 
             if (testName.isEmpty()) {
                 Toast.makeText(
@@ -34,9 +45,13 @@ class TestCreationActivity : AppCompatActivity() {
             }
 
             if (manualTimeInput.isEmpty()) {
+                manualTimeInput = "0"
+            }
+
+            if (jobSelectedSt == null) {
                 Toast.makeText(
                     this@TestCreationActivity,
-                    "Test Time cannot be empty",
+                    "Please Select The Job For Test",
                     Toast.LENGTH_SHORT
                 ).show()
                 return@setOnClickListener
@@ -55,9 +70,18 @@ class TestCreationActivity : AppCompatActivity() {
             intent?.apply {
                 putExtra("testTime", manualTimeInput)
                 putExtra("testName", testName)
+                putExtra("testJob", jobSelectedSt)
                 startActivity(this)
             }
 
         }
+
+        binding.btnSelectJob.setOnClickListener {
+            val intent = Intent(this@TestCreationActivity, JobsPostedActivity::class.java)
+            intent.putExtra("fromTest", true)
+            startActivity(intent)
+            finish()
+        }
     }
+
 }

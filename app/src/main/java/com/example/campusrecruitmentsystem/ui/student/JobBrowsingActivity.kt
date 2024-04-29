@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.campusrecruitmentsystem.adapters.JobAdapter
 import com.example.campusrecruitmentsystem.databinding.ActivityJobBrowsingBinding
 import com.example.campusrecruitmentsystem.listeners.OnItemClickListener
-import com.example.campusrecruitmentsystem.models.Job
+import com.example.campusrecruitmentsystem.models.main.Job
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -28,7 +28,7 @@ class JobBrowsingActivity : AppCompatActivity(), OnItemClickListener {
         setContentView(binding.root)
 
         jobList = mutableListOf()
-        jobAdapter = JobAdapter(jobList)
+        jobAdapter = JobAdapter(jobList, false, this@JobBrowsingActivity)
 
         binding.recyclerViewJobs.layoutManager = LinearLayoutManager(this)
         binding.recyclerViewJobs.adapter = jobAdapter

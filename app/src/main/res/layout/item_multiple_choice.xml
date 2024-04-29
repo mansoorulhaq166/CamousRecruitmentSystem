@@ -48,8 +48,7 @@
             <CheckBox
                 android:id="@+id/choice_1_checkbox"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:buttonTint="@color/white" />
+                android:layout_height="wrap_content"/>
 
             <EditText
                 android:id="@+id/choice_1"
@@ -73,8 +72,7 @@
             <CheckBox
                 android:id="@+id/choice_2_checkbox"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:buttonTint="@color/white" />
+                android:layout_height="wrap_content"/>
 
             <EditText
                 android:id="@+id/choice_2"
@@ -98,8 +96,7 @@
             <CheckBox
                 android:id="@+id/choice_3_checkbox"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:buttonTint="@color/white" />
+                android:layout_height="wrap_content"/>
 
             <EditText
                 android:id="@+id/choice_3"
@@ -123,8 +120,7 @@
             <CheckBox
                 android:id="@+id/choice_4_checkbox"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:buttonTint="@color/white" />
+                android:layout_height="wrap_content"/>
 
             <EditText
                 android:id="@+id/choice_4"

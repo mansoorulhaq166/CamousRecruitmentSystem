@@ -23,35 +23,101 @@
             android:src="@drawable/baseline_arrow_back_ios_24" />
 
         <TextView
-            android:id="@+id/textViewName"
+            android:id="@+id/textViewTop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_gravity="center"
+            android:text="Edit Profile"
             android:fontFamily="@font/seoul_hangang_cb"
             android:textColor="@color/white"
             android:textSize="@dimen/_24ssp"
             android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/confirm_save"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:contentDescription="@string/image_description"
+            android:src="@drawable/baseline_check_light" />
+
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/info_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_below="@id/toolbar_profile"
         android:padding="@dimen/_8sdp">
 
-        <!-- Role -->
         <TextView
             android:id="@+id/textViewRole"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:fontFamily="@font/seoul_hangang_cb"
+            android:textColor="@color/white"
+            android:text="Student"
+            android:textSize="@dimen/_22ssp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/textViewName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_16sdp"
             android:fontFamily="@font/seoul_hangang_cb"
+            android:text="Student/Recruiter"
+            android:paddingVertical="@dimen/_8sdp"
+            android:paddingHorizontal="@dimen/_16sdp"
+            android:background="@drawable/edit_text_bg"
+            android:inputType="textPersonName"
             android:textColor="@color/white"
             android:textSize="@dimen/_20ssp"
             android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/textViewEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:text="Name@gmail.com"
+            android:inputType="textEmailAddress"
+            android:paddingVertical="@dimen/_8sdp"
+            android:paddingHorizontal="@dimen/_16sdp"
+            android:background="@drawable/edit_text_bg"
+            android:fontFamily="@font/seoul_hangang_cb"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_18ssp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/textViewContact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:hint="Enter Contact Number"
+            android:paddingVertical="@dimen/_8sdp"
+            android:paddingHorizontal="@dimen/_16sdp"
+            android:background="@drawable/edit_text_bg"
+            android:fontFamily="@font/seoul_hangang_cb"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_18ssp"
+            android:textStyle="bold"
+            android:inputType="phone"
+            android:importantForAutofill="no" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/info_layout"
+        android:padding="@dimen/_8sdp">
 
         <TextView
             android:id="@+id/textViewJobCount"
@@ -84,6 +150,21 @@
             android:text="View Posted Jobs"
             android:textColor="?attr/colorAccent"
             android:textSize="@dimen/_14ssp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/btnChangePassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="@drawable/sign_up_bg"
+            android:text="Change Password"
+            android:paddingHorizontal="@dimen/_16sdp"
+            android:paddingVertical="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:fontFamily="@font/seoul_hangang_cb"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16ssp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -129,7 +210,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/image_description"
-                android:src="@drawable/baseline_person_pin_24" />
+                android:src="@drawable/profile_selected" />
 
             <TextView
                 android:layout_width="wrap_content"

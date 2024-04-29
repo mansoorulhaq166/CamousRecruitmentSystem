@@ -6,10 +6,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.campusrecruitmentsystem.adapters.test.TestAdapter
+import com.example.campusrecruitmentsystem.adapters.test.DeleteTestAdapter
 import com.example.campusrecruitmentsystem.databinding.ActivityDeleteTestBinding
 import com.example.campusrecruitmentsystem.listeners.TestItemClickListener
-import com.example.campusrecruitmentsystem.models.Test
+import com.example.campusrecruitmentsystem.models.recruiter.Test
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -19,7 +19,7 @@ import com.google.firebase.database.ValueEventListener
 
 class DeleteTestActivity : AppCompatActivity(), TestItemClickListener {
     private lateinit var binding: ActivityDeleteTestBinding
-    private lateinit var testAdapter: TestAdapter
+    private lateinit var deleteTestAdapter: DeleteTestAdapter
     private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,27 +28,17 @@ class DeleteTestActivity : AppCompatActivity(), TestItemClickListener {
 
         auth = FirebaseAuth.getInstance()
 
-        testAdapter = TestAdapter(mutableListOf())
-        binding.recyclerViewTests.adapter = testAdapter
+        deleteTestAdapter = DeleteTestAdapter(mutableListOf())
+        binding.recyclerViewTests.adapter = deleteTestAdapter
         binding.recyclerViewTests.layoutManager = LinearLayoutManager(this)
 
-        testAdapter.setOnItemClickListener(this)
+        deleteTestAdapter.setOnItemClickListener(this)
+
         val testsRef = FirebaseDatabase.getInstance().reference.child("tests")
-
-        // Fetch data from "MultipleChoiceTests" node
-        val multipleChoiceRef = testsRef.child("MultipleChoiceTests")
-        fetchDataFromFirebase(multipleChoiceRef, 1)
-
-        // Fetch data from "TrueFalseTests" node
-        val trueFalseRef = testsRef.child("TrueFalseTests")
-        fetchDataFromFirebase(trueFalseRef, 2)
-
-        // Fetch data from "ShortAnswersTests" node
-        val shortAnswersRef = testsRef.child("ShortAnswerTests")
-        fetchDataFromFirebase(shortAnswersRef, 3)
+        fetchDataFromFirebase(testsRef)
     }
 
-    private fun fetchDataFromFirebase(databaseReference: DatabaseReference, type: Int) {
+    private fun fetchDataFromFirebase(databaseReference: DatabaseReference) {
         val userId = auth.currentUser?.uid
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -65,8 +55,28 @@ class DeleteTestActivity : AppCompatActivity(), TestItemClickListener {
                                 snapshot.child("creationTime").getValue(Long::class.java) ?: 0
                             val testTime =
                                 snapshot.child("testTime").getValue(String::class.java) ?: ""
+                            val testType =
+                                snapshot.child("testType").getValue(String::class.java) ?: ""
 
-                            testAdapter.addData(
+                            val type: Int = when (testType) {
+                                "Multiple Choice" -> {
+                                    1
+                                }
+
+                                "True/False" -> {
+                                    2
+                                }
+
+                                "Short Answers" -> {
+                                    3
+                                }
+
+                                else -> {
+                                    1
+                                }
+                            }
+
+                            deleteTestAdapter.addData(
                                 Test(
                                     testId.toString(),
                                     testName,

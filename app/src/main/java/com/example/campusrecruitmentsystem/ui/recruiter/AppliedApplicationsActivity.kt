@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.campusrecruitmentsystem.adapters.ApplicationsAdapter
 import com.example.campusrecruitmentsystem.databinding.ActivityAppliedApplicationsBinding
-import com.example.campusrecruitmentsystem.models.ApplicationDetails
+import com.example.campusrecruitmentsystem.models.main.ApplicationDetails
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -32,15 +32,24 @@ class AppliedApplicationsActivity : AppCompatActivity() {
         binding = ActivityAppliedApplicationsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                permission
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             ActivityCompat.requestPermissions(this, arrayOf(permission), requestCode)
+        }
+
+        binding.backApplication.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
         }
         auth = FirebaseAuth.getInstance()
         val currentUserId = auth.currentUser?.uid
 
         database = FirebaseDatabase.getInstance().getReference("applications")
 
-        val allApplicationsQuery: Query = database.orderByChild("recruiterId").equalTo(currentUserId)
+        val allApplicationsQuery: Query =
+            database.orderByChild("recruiterId").equalTo(currentUserId)
 
         allApplicationsQuery.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(allApplicationsSnapshot: DataSnapshot) {
@@ -55,7 +64,8 @@ class AppliedApplicationsActivity : AppCompatActivity() {
                 }
 
                 // Filter applications based on the job ID and recruiter ID
-                val filteredApplications = allApplications.filter { it.recruiterId == currentUserId }
+                val filteredApplications =
+                    allApplications.filter { it.recruiterId == currentUserId }
                 val layoutManager = LinearLayoutManager(this@AppliedApplicationsActivity)
                 binding.recyclerview.layoutManager = layoutManager
                 val adapter = ApplicationsAdapter(filteredApplications)

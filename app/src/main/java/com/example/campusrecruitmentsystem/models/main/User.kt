@@ -1,4 +1,4 @@
-package com.example.campusrecruitmentsystem.models
+package com.example.campusrecruitmentsystem.models.main
 
 data class User(
     val name: String = "",
