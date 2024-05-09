@@ -46,7 +46,7 @@
         android:background="@drawable/apply_job_bg"
         android:fontFamily="@font/poppins_regular"
         android:paddingHorizontal="@dimen/_16sdp"
-        android:paddingVertical="@dimen/_5sdp"
+        android:paddingTop="@dimen/_4sdp"
         android:text="Select Job"
         android:textColor="@color/white"
         android:textSize="@dimen/_18ssp"

@@ -1,12 +1,8 @@
-package com.example.campusrecruitmentsystem.ui.recruiter
+package com.example.campusrecruitmentsystem.ui.recruiter.application
 
-import android.Manifest
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.campusrecruitmentsystem.adapters.ApplicationsAdapter
 import com.example.campusrecruitmentsystem.databinding.ActivityAppliedApplicationsBinding
@@ -24,21 +20,11 @@ class AppliedApplicationsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAppliedApplicationsBinding
     private lateinit var database: DatabaseReference
     private lateinit var auth: FirebaseAuth
-    private val permission = Manifest.permission.WRITE_EXTERNAL_STORAGE
-    private val requestCode = 1234
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAppliedApplicationsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        if (ContextCompat.checkSelfPermission(
-                this,
-                permission
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(this, arrayOf(permission), requestCode)
-        }
 
         binding.backApplication.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()

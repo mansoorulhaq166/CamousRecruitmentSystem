@@ -1,26 +1,19 @@
 package com.example.campusrecruitmentsystem.adapters
 
-import android.content.Context
 import android.content.Intent
-import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.campusrecruitmentsystem.R
 import com.example.campusrecruitmentsystem.models.main.ApplicationDetails
-import com.example.campusrecruitmentsystem.ui.recruiter.ApplicationDetailsActivity
-import com.google.android.material.progressindicator.CircularProgressIndicator
-import com.google.firebase.auth.FirebaseAuth
+import com.example.campusrecruitmentsystem.ui.recruiter.application.ApplicationDetailsActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.storage.FirebaseStorage
-import java.io.File
 
 class ApplicationsAdapter(private val appliedApplications: List<ApplicationDetails>) :
     RecyclerView.Adapter<ApplicationsAdapter.ViewHolder>() {
@@ -29,10 +22,8 @@ class ApplicationsAdapter(private val appliedApplications: List<ApplicationDetai
         val textViewStudentName: TextView = itemView.findViewById(R.id.textViewStudentName)
         val textViewJobTitle: TextView = itemView.findViewById(R.id.textViewJobTitle)
         val textViewApplicationDate: TextView = itemView.findViewById(R.id.textViewApplicationDate)
-        val btnDownloadResume: TextView = itemView.findViewById(R.id.btnDownloadResume)
+        val textApplicationStatus: TextView = itemView.findViewById(R.id.itemApplicationStatus)
         val btnViewDetails: TextView = itemView.findViewById(R.id.btnViewDetails)
-        val progressBar: CircularProgressIndicator = itemView.findViewById(R.id.progress_bar)
-        val progressText: TextView = itemView.findViewById(R.id.progress_text)
         var userId: String? = null
     }
 
@@ -44,19 +35,22 @@ class ApplicationsAdapter(private val appliedApplications: List<ApplicationDetai
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val appliedApplication = appliedApplications[position]
-        val appContext = holder.itemView.context
-        var name = ""
-        var title = ""
 
         holder.userId = appliedApplication.studentId!!
+        val status = appliedApplication.status
+        if (status != null) {
+            if (status.isNotEmpty()) {
+                val textStatus = "Status: $status"
+                holder.textApplicationStatus.text = textStatus
+            }
+        }
         fetchStudentName(appliedApplication.studentId) { studentName ->
             holder.textViewStudentName.text = studentName
-            name = studentName
+
         }
 
         fetchJobTitle(appliedApplication.jobId!!) { jobTitle ->
             holder.textViewJobTitle.text = jobTitle
-            title = jobTitle
         }
 
 
@@ -66,23 +60,6 @@ class ApplicationsAdapter(private val appliedApplications: List<ApplicationDetai
             val intent = Intent(holder.itemView.context, ApplicationDetailsActivity::class.java)
             intent.putExtra("application", appliedApplication.applicationId)
             holder.itemView.context.startActivity(intent)
-        }
-        holder.btnDownloadResume.setOnClickListener {
-            val resumeUrl = appliedApplication.resumeUrl
-
-            if (resumeUrl != null) {
-                if (resumeUrl.isNotEmpty()) {
-                    val currentUser = FirebaseAuth.getInstance().currentUser
-                    if (currentUser != null) {
-                        downloadResume(appContext, resumeUrl, name, title, holder)
-                    } else {
-                        Toast.makeText(appContext, "User not authenticated", Toast.LENGTH_SHORT)
-                            .show()
-                    }
-                } else {
-                    Toast.makeText(appContext, "Resume URL is empty", Toast.LENGTH_SHORT).show()
-                }
-            }
         }
     }
 
@@ -120,57 +97,5 @@ class ApplicationsAdapter(private val appliedApplications: List<ApplicationDetai
                     Log.e("ApplicationsAdapter", "Error fetching job title: ${error.message}")
                 }
             })
-    }
-
-
-    private fun downloadResume(
-        context: Context,
-        resumeUrl: String,
-        studentName: String,
-        jobTitle: String,
-        holder: ViewHolder
-    ) {
-        holder.progressBar.visibility = View.VISIBLE
-        holder.progressText.visibility = View.VISIBLE
-        holder.btnDownloadResume.visibility = View.GONE
-
-        val storageRef = FirebaseStorage.getInstance().getReferenceFromUrl(resumeUrl)
-
-        val fileName = "$studentName - $jobTitle - resume.pdf"
-        val file = File(
-            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
-            fileName
-        )
-
-        try {
-//            val outputStream = FileOutputStream(file)
-            storageRef.getFile(file)
-                .addOnSuccessListener {
-                    Toast.makeText(context, "File downloaded successfully", Toast.LENGTH_SHORT)
-                        .show()
-                    holder.progressBar.visibility = View.GONE
-                    holder.progressText.visibility = View.GONE
-                    holder.btnDownloadResume.visibility = View.VISIBLE
-                }
-                .addOnFailureListener { exception ->
-                    Toast.makeText(context, "Failed to download resume", Toast.LENGTH_SHORT).show()
-                    exception.printStackTrace()
-                    holder.progressBar.visibility = View.GONE
-                    holder.progressText.visibility = View.GONE
-                    holder.btnDownloadResume.visibility = View.VISIBLE
-                }
-                .addOnProgressListener { taskSnapshot ->
-                    val progress =
-                        (100.0 * taskSnapshot.bytesTransferred / taskSnapshot.totalByteCount).toInt()
-
-                    holder.progressText.text = context.getString(R.string.upload_progress, progress)
-                    holder.progressBar.progress = progress
-                }
-        } catch (e: Exception) {
-            e.printStackTrace()
-            Toast.makeText(context, "Failed to download resume", Toast.LENGTH_SHORT).show()
-            holder.progressBar.visibility = View.GONE
-            holder.btnDownloadResume.visibility = View.VISIBLE
-        }
     }
 }

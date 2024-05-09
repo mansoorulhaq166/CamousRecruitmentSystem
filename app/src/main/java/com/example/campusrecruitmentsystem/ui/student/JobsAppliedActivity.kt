@@ -48,40 +48,49 @@ class JobsAppliedActivity : AppCompatActivity() {
 
     private fun fetchAppliedJobs() {
         val studentId = currentUser.uid
-        val applicationReference = database.child("applications").orderByChild("studentId").equalTo(studentId)
+        val applicationReference =
+            database.child("applications").orderByChild("studentId").equalTo(studentId)
 
         applicationReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                jobsList.clear()
+                if (snapshot.exists()) {
+                    jobsList.clear()
+                    for (applicationSnapshot in snapshot.children) {
+                        val application =
+                            applicationSnapshot.getValue(ApplicationDetails::class.java)
+                        val jobId = application?.jobId
 
-                for (applicationSnapshot in snapshot.children) {
-                    val application = applicationSnapshot.getValue(ApplicationDetails::class.java)
-                    val jobId = application?.jobId
-
-                    if (jobId != null) {
-                        // Fetch the job details using the jobId
-                        val jobReference = database.child("jobs").child(jobId)
-                        jobReference.addListenerForSingleValueEvent(object : ValueEventListener {
-                            override fun onDataChange(jobSnapshot: DataSnapshot) {
-                                val job = jobSnapshot.getValue(Job::class.java)
-                                if (job != null) {
-                                    jobsList.add(job)
+                        if (jobId != null) {
+                            // Fetch the job details using the jobId
+                            val jobReference = database.child("jobs").child(jobId)
+                            jobReference.addListenerForSingleValueEvent(object :
+                                ValueEventListener {
+                                override fun onDataChange(jobSnapshot: DataSnapshot) {
+                                    val job = jobSnapshot.getValue(Job::class.java)
+                                    if (job != null) {
+                                        jobsList.add(job)
+                                        jobAdapter.notifyDataSetChanged()
+                                    }
                                     if (jobsList.isEmpty()) {
                                         binding.textViewNoJobsApplied.visibility = View.VISIBLE
-                                        binding.progressBar.visibility = View.GONE
                                     } else {
                                         binding.textViewNoJobsApplied.visibility = View.GONE
-                                        jobAdapter.notifyDataSetChanged()
-                                        binding.progressBar.visibility = View.GONE
                                     }
+                                    binding.progressBar.visibility = View.GONE
                                 }
-                            }
 
-                            override fun onCancelled(error: DatabaseError) {
-                                Log.e("JobsAppliedActivity", "Error fetching job details: ${error.message}")
-                            }
-                        })
+                                override fun onCancelled(error: DatabaseError) {
+                                    Log.e(
+                                        "JobsAppliedActivity",
+                                        "Error fetching job details: ${error.message}"
+                                    )
+                                }
+                            })
+                        }
                     }
+                } else {
+                    binding.textViewNoJobsApplied.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.GONE
                 }
             }
 

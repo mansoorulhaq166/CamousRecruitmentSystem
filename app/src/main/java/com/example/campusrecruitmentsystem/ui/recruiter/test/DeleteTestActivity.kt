@@ -36,6 +36,8 @@ class DeleteTestActivity : AppCompatActivity(), TestItemClickListener {
 
         val testsRef = FirebaseDatabase.getInstance().reference.child("tests")
         fetchDataFromFirebase(testsRef)
+
+        binding.backTestDelete.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
     }
 
     private fun fetchDataFromFirebase(databaseReference: DatabaseReference) {

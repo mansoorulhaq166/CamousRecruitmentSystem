@@ -51,60 +51,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewApplicationDate">
 
-        <com.google.android.material.progressindicator.CircularProgressIndicator
-            android:id="@+id/progress_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:layout_marginEnd="@dimen/_48sdp"
-            android:visibility="gone"
-            app:indicatorColor="@color/white"            android:layout_centerVertical="true"
-            android:layout_toStartOf="@id/btnViewDetails"
-            />
-
         <TextView
-            android:id="@+id/progress_text"
+            android:id="@+id/itemApplicationStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_28sdp"
-            android:layout_marginEnd="@dimen/_56sdp"
+            android:layout_alignParentEnd="true"
+            android:fontFamily="@font/seoul_hangang_cb"
             android:textColor="@color/white"
-            android:textSize="@dimen/_10ssp"
-            android:textStyle="bold"
-            android:visibility="gone"
-            android:layout_centerVertical="true"
-            android:layout_toStartOf="@id/btnViewDetails"
-            />
-
-        <TextView
-            android:id="@+id/btnDownloadResume"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toStartOf="@id/btnViewDetails"
-            android:background="@drawable/login_bg"
-            android:fontFamily="@font/poppins_regular"
-            android:paddingHorizontal="@dimen/_12sdp"
             android:layout_marginEnd="@dimen/_8sdp"
-            android:paddingVertical="@dimen/_4sdp"
-            android:text="Download Resume"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_12ssp"
+            android:textSize="@dimen/_14ssp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/btnViewDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/itemApplicationStatus"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/_8sdp"
             android:background="@drawable/login_bg"
             android:fontFamily="@font/poppins_regular"
             android:paddingHorizontal="@dimen/_16sdp"
-            android:paddingVertical="@dimen/_4sdp"
+            android:paddingTop="@dimen/_4sdp"
             android:text="View Details"
             android:textColor="@color/white"
-            android:textSize="@dimen/_12ssp"
+            android:textSize="@dimen/_14ssp"
             android:textStyle="bold" />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

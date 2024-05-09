@@ -7,7 +7,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.campusrecruitmentsystem.databinding.ActivityMainBinding
-import com.example.campusrecruitmentsystem.ui.recruiter.AppliedApplicationsActivity
+import com.example.campusrecruitmentsystem.ui.recruiter.application.AppliedApplicationsActivity
 import com.example.campusrecruitmentsystem.ui.recruiter.JobPostingActivity
 import com.example.campusrecruitmentsystem.ui.recruiter.JobsPostedActivity
 import com.example.campusrecruitmentsystem.ui.recruiter.NotificationsActivity

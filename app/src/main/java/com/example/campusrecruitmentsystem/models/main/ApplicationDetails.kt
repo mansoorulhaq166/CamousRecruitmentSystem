@@ -6,5 +6,8 @@ data class ApplicationDetails(
     val studentId: String? = null,
     val recruiterId: String? = null,
     val resumeUrl: String? = null,
-    val applicationDate: String? = null
+    val applicationDate: String? = null,
+    val status: String? = null,
+    val comments: String? = null,
+    val notes: String? = null
 )

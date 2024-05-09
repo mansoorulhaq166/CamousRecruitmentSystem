@@ -212,7 +212,10 @@ class JobDetailsActivity : AppCompatActivity() {
                         studentId = studentId,
                         recruiterId = recruiterId,
                         resumeUrl = downloadUrl,
-                        applicationDate = getCurrentDate()
+                        applicationDate = getCurrentDate(),
+                        status = "Pending",
+                        notes = "",
+                        comments = ""
                     )
 
                     databaseReference.child(applicationId).setValue(application)

@@ -1,208 +1,294 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/app_color"
-    tools:context=".ui.recruiter.ApplicationDetailsActivity">
-
-    <RelativeLayout
-        android:id="@+id/rl_application_details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/button_color"
-        android:padding="@dimen/_8sdp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:fontFamily="@font/seoul_hangang_cb"
-            android:text="Application Details"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_20ssp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/back_app_details"
-            android:layout_width="@dimen/_24sdp"
-            android:layout_height="@dimen/_24sdp"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:contentDescription="@string/image_description"
-            android:src="@drawable/baseline_arrow_back_ios_24" />
-    </RelativeLayout>
+    android:fillViewport="true"
+    tools:context=".ui.recruiter.application.ApplicationDetailsActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/rl_application_details"
-        android:padding="@dimen/_16sdp">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/textViewApplicantDetails"
+        <RelativeLayout
+            android:id="@+id/rl_application_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:text="Applicant Details: "
-            android:textColor="@color/white"
-            android:fontFamily="@font/poppins_regular"
-            android:textSize="@dimen/_18ssp"
-            android:textStyle="bold" />
+            android:background="@color/button_color"
+            android:padding="@dimen/_8sdp">
 
-        <!-- Name -->
-        <TextView
-            android:id="@+id/textViewName"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/seoul_hangang_cb"
+                android:text="Application Details"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_20ssp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/back_app_details"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:contentDescription="@string/image_description"
+                android:src="@drawable/baseline_arrow_back_ios_24" />
+
+            <ImageView
+                android:id="@+id/img_check_application"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:contentDescription="@string/image_description"
+                android:src="@drawable/baseline_check_light" />
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textViewApplicantDetails"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:text="Name: John Doe"
-            android:textColor="@color/white"
-            android:fontFamily="@font/seoul_hangang_cb"
-            android:textStyle="bold"
-            android:textSize="@dimen/_16ssp" />
+            android:layout_below="@id/rl_application_details"
+            android:padding="@dimen/_10sdp">
 
-        <!-- Contact Information -->
-        <TextView
-            android:id="@+id/textViewContactNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textViewName"
-            android:visibility="gone"
-            android:textColor="@color/white"
-            android:fontFamily="@font/seoul_hangang_cb"
-            android:textStyle="bold"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:text="Contact Information: john.doe@example.com"
-            android:textSize="@dimen/_16ssp" />
+            <TextView
+                android:id="@+id/textViewApplicantDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Applicant Details: "
+                android:textColor="#00ff00"
+                android:textSize="@dimen/_20ssp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textViewContactEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textViewContactNumber"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:text="Contact Information: john.doe@example.com"
-            android:textColor="@color/white"
-            android:fontFamily="@font/seoul_hangang_cb"
-            android:textStyle="bold"
-            android:textSize="@dimen/_16ssp" />
+            <!-- Name -->
+            <TextView
+                android:id="@+id/textViewName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewApplicantDetails"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/seoul_hangang_cb"
+                android:text="Name: John Doe"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16ssp"
+                android:textStyle="bold" />
 
-        <!-- Additional Documents -->
-        <TextView
-            android:id="@+id/textViewAdditionalDocs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textViewContactEmail"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:text="Additional Documents: Cover Letter"
-            android:textColor="@color/white"
-            android:fontFamily="@font/seoul_hangang_cb"
-            android:textStyle="bold"
-            android:layout_marginBottom="@dimen/_8sdp"
-            android:textSize="@dimen/_16ssp" />
+            <!-- Contact Information -->
+            <TextView
+                android:id="@+id/textViewContactNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewName"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/seoul_hangang_cb"
+                android:text="Contact Information: john.doe@example.com"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16ssp"
+                android:textStyle="bold"
+                android:visibility="gone" />
 
-        <!-- Job Application Details Section -->
-        <TextView
-            android:id="@+id/textViewJobAppDetails"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textViewAdditionalDocs"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:text="Job Application Details: "
-            android:textColor="@color/white"
-            android:fontFamily="@font/poppins_regular"
-            android:textSize="@dimen/_18ssp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/textViewContactEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewContactNumber"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/seoul_hangang_cb"
+                android:text="Contact Information: john.doe@example.com"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16ssp"
+                android:textStyle="bold" />
 
-        <!-- Application Date -->
-        <TextView
-            android:id="@+id/textViewApplicationDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textViewJobAppDetails"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/seoul_hangang_cb"
-            android:textStyle="bold"
-            android:textSize="@dimen/_16ssp" />
+            <!-- Additional Documents -->
+            <RelativeLayout
+                android:id="@+id/download_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewContactEmail"
+                android:layout_marginTop="@dimen/_8sdp">
 
-        <!-- Application Status -->
-        <TextView
-            android:id="@+id/textViewAppStatus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textViewApplicationDate"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:text="Status: Pending"
-            android:textColor="@color/white"
-            android:fontFamily="@font/seoul_hangang_cb"
-            android:textStyle="bold"
-            android:textSize="@dimen/_16ssp" />
+                <ProgressBar
+                    android:id="@+id/downloadProgressbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/_16sdp"
+                    android:indeterminateTint="@color/white"
+                    android:visibility="gone" />
 
-        <!-- Notes or Comments -->
-        <TextView
-            android:id="@+id/textViewNotes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textViewAppStatus"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:text="Notes/Comments:"
-            android:textColor="@color/white"
-            android:fontFamily="@font/seoul_hangang_cb"
-            android:textStyle="bold"
-            android:textSize="@dimen/_16ssp" />
+                <TextView
+                    android:id="@+id/textViewAdditionalDocs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:background="@drawable/login_bg"
+                    android:fontFamily="@font/seoul_hangang_cb"
+                    android:paddingHorizontal="@dimen/_16sdp"
+                    android:paddingVertical="@dimen/_8sdp"
+                    android:text="Download Resume"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12ssp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
 
-        <!-- Interview Schedule and Feedback -->
-        <TextView
-            android:id="@+id/textViewInterview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textViewNotes"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:text="Interview Schedule and Feedback"
-            android:textColor="@color/white"
-            android:fontFamily="@font/seoul_hangang_cb"
-            android:textStyle="bold"
-            android:textSize="@dimen/_16ssp" />
+            <!-- Job Application Details Section -->
+            <TextView
+                android:id="@+id/textViewJobAppDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/download_layout"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Job Application Details: "
+                android:textColor="#00ff00"
+                android:textSize="@dimen/_20ssp"
+                android:textStyle="bold" />
 
-        <!-- Action Buttons -->
-        <Button
-            android:id="@+id/btnAccept"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textViewInterview"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:background="@drawable/login_bg"
-            android:text="Accept"
-            android:textColor="@color/white" />
+            <!-- Application Date -->
+            <TextView
+                android:id="@+id/textViewApplicationDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewJobAppDetails"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/seoul_hangang_cb"
+                android:text="Date"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16ssp"
+                android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/btnReject"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textViewInterview"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:layout_toEndOf="@id/btnAccept"
-            android:background="@drawable/login_bg"
-            android:text="Reject"
-            android:textColor="@color/white" />
+            <!-- Application Status -->
+            <TextView
+                android:id="@+id/textViewAppStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewApplicationDate"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/seoul_hangang_cb"
+                android:text="Status: Pending"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16ssp"
+                android:textStyle="bold" />
 
-        <!-- Internal Notes -->
-        <TextView
-            android:id="@+id/textViewInternalNotes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/btnAccept"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:text="Internal Notes:"
-            android:textColor="@color/white"
-            android:fontFamily="@font/seoul_hangang_cb"
-            android:textStyle="bold"
-            android:textSize="@dimen/_16ssp" />
+            <!-- Notes or Comments -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textCommentsLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewAppStatus"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:boxStrokeColor="@color/white"
+                app:boxStrokeWidthFocused="@dimen/_2sdp"
+                app:hintTextColor="@color/white">
+
+                <EditText
+                    android:id="@+id/edTextComments"
+                    style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/seoul_hangang_cb"
+                    android:hint="Notes/Comments For Applicant"
+                    android:importantForAutofill="no"
+                    android:inputType="textNoSuggestions"
+                    android:shadowColor="@color/white"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="bold" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Internal Notes -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/internalNotesLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textCommentsLayout"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:boxStrokeColor="@color/white"
+                app:boxStrokeWidthFocused="@dimen/_2sdp"
+                app:hintTextColor="@color/white">
+
+                <EditText
+                    android:id="@+id/edTextInternalNotes"
+                    style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/seoul_hangang_cb"
+                    android:hint="Internal Notes:"
+                    android:importantForAutofill="no"
+                    android:inputType="textNoSuggestions"
+                    android:shadowColor="@color/white"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="bold" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Interview Schedule and Feedback -->
+            <TextView
+                android:id="@+id/scheduleInterview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/internalNotesLayout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:background="@drawable/login_bg"
+                android:fontFamily="@font/seoul_hangang_cb"
+                android:paddingHorizontal="@dimen/_16sdp"
+                android:paddingVertical="@dimen/_8sdp"
+                android:text="Schedule Interview"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16ssp"
+                android:textStyle="bold" />
+
+            <!-- Action Buttons -->
+            <LinearLayout
+                android:id="@+id/ll_action_buttons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/btnReject"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@drawable/login_bg"
+                    android:backgroundTint="#ff0000"
+                    android:fontFamily="@font/seoul_hangang_cb"
+                    android:gravity="center"
+                    android:paddingVertical="@dimen/_8sdp"
+                    android:text="Reject"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_16ssp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/btnAccept"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/login_bg"
+                    android:backgroundTint="#00ff00"
+                    android:fontFamily="@font/seoul_hangang_cb"
+                    android:gravity="center"
+                    android:paddingVertical="@dimen/_8sdp"
+                    android:text="Accept"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_16ssp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </RelativeLayout>
     </RelativeLayout>
-</RelativeLayout>
+</ScrollView>

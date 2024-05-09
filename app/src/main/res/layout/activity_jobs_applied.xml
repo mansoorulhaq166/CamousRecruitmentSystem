@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:fontFamily="@font/seoul_hangang_cb"
-            android:text="Job Details"
+            android:text="Jobs Applied"
             android:textColor="@color/white"
             android:textSize="@dimen/_20ssp"
             android:textStyle="bold" />
@@ -50,6 +50,7 @@
         android:id="@+id/recyclerViewAppliedJobs"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="@dimen/_6sdp"
         android:layout_below="@id/rl_top_jobs_applied"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
