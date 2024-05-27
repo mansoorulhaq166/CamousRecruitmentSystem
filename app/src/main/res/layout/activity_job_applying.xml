@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_color"
+    android:fillViewport="true"
+    tools:context=".ui.student.jobs.JobApplyingActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/button_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="@dimen/_8sdp"
+            android:background="@drawable/main_button_bg"
+            android:fontFamily="@font/seoul_hangang_cb"
+            android:paddingHorizontal="@dimen/_16sdp"
+            android:paddingVertical="@dimen/_8sdp"
+            android:text="Cancel"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16ssp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:id="@+id/applying_job_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/button_cancel"
+            android:padding="@dimen/_8sdp">
+
+            <TextView
+                android:id="@+id/applying_job_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/_8sdp"
+                android:fontFamily="@font/seoul_hangang_cb"
+                android:text="Job Title"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/applying_job_company"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/applying_job_title"
+                android:fontFamily="@font/seoul_hangang_cb"
+                android:text="Job Company"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_2sdp"
+                android:layout_below="@id/applying_job_company"
+                android:layout_marginVertical="@dimen/_8sdp"
+                android:background="@color/main_color" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/applying_job_toolbar"
+            android:orientation="vertical"
+            android:padding="@dimen/_8sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Please review your application"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_20ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Contact Information"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16ssp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:boxStrokeColor="@color/white"
+                app:boxStrokeWidthFocused="@dimen/_2sdp"
+                app:hintTextColor="@color/white">
+
+                <EditText
+                    android:id="@+id/editTextName"
+                    style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/profile_selected"
+                    android:drawablePadding="@dimen/_16sdp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Name"
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"
+                    android:shadowColor="@color/white"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="bold" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:boxStrokeColor="@color/white"
+                app:boxStrokeWidthFocused="@dimen/_2sdp"
+                app:hintTextColor="@color/white">
+
+                <EditText
+                    android:id="@+id/editTextEmail"
+                    style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/baseline_email_24"
+                    android:drawablePadding="@dimen/_16sdp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Email"
+                    android:importantForAutofill="no"
+                    android:inputType="textEmailAddress"
+                    android:shadowColor="@color/white"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="bold" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:boxStrokeColor="@color/white"
+                app:boxStrokeWidthFocused="@dimen/_2sdp"
+                app:hintTextColor="@color/white">
+
+                <EditText
+                    android:id="@+id/editTextCity"
+                    style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/baseline_location_on_24"
+                    android:drawablePadding="@dimen/_16sdp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="City"
+                    android:importantForAutofill="no"
+                    android:inputType="textPostalAddress"
+                    android:shadowColor="@color/white"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="bold" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:boxStrokeColor="@color/white"
+                app:boxStrokeWidthFocused="@dimen/_2sdp"
+                app:hintTextColor="@color/white">
+
+                <EditText
+                    android:id="@+id/editTextPhoneNumber"
+                    style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/baseline_contact_phone_24"
+                    android:drawablePadding="@dimen/_16sdp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Phone Number"
+                    android:importantForAutofill="no"
+                    android:inputType="phone"
+                    android:shadowColor="@color/white"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="bold" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/select_resume_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:background="@drawable/main_button_bg"
+                android:fontFamily="@font/seoul_hangang_cb"
+                android:paddingHorizontal="@dimen/_16sdp"
+                android:paddingVertical="@dimen/_8sdp"
+                android:text="Select Your Resume"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16ssp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:boxStrokeColor="@color/white"
+                app:boxStrokeWidthFocused="@dimen/_2sdp"
+                app:hintTextColor="@color/white">
+
+                <EditText
+                    android:id="@+id/editTextRelevantExperience"
+                    style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/baseline_business_24"
+                    android:drawablePadding="@dimen/_16sdp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Relevant Experience (Optional)"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:shadowColor="@color/white"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="bold" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp">
+
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:id="@+id/progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="gone"
+                    app:indicatorColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/progress_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/progress_bar"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10ssp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/submit_application_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_32sdp"
+                    android:background="@drawable/main_button_bg"
+                    android:fontFamily="@font/seoul_hangang_cb"
+                    android:paddingHorizontal="@dimen/_16sdp"
+                    android:paddingVertical="@dimen/_8sdp"
+                    android:text="Submit Your Application"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_16ssp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>

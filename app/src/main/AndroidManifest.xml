@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32"
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@drawable/app_icon"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@drawable/app_icon"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.CampusRecruitmentSystem"
+        tools:targetApi="31">
+        <activity
+            android:name=".ui.recruiter.test.TestResultDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.recruiter.test.TestResultsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.student.test.ShortTestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.student.jobs.JobApplyingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.student.jobs.AppliedJobsDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.student.InterviewStatusActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.recruiter.application.ScheduleInterviewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.recruiter.application.ApplicationDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.ChangePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.student.test.ChoiceTestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.student.test.TakeTestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.recruiter.test.DeleteTestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.recruiter.TestManagementActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.recruiter.test.ShortAnswerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.recruiter.test.TrueFalseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.recruiter.test.MultipleChoiceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.recruiter.test.TestCreationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.recruiter.application.AppliedApplicationsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.recruiter.NotificationsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.student.jobs.JobsAppliedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.recruiter.JobsPostedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.student.jobs.JobDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.WelcomeActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.student.jobs.JobBrowsingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.recruiter.JobPostingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:exported="false" />
+    </application>
+
+</manifest>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "459149604760",
+    "project_id": "campus-recruitment-syste-ddabf",
+    "storage_bucket": "campus-recruitment-syste-ddabf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:459149604760:android:c2cec3e5bfddf270e79ded",
+        "android_client_info": {
+          "package_name": "com.example.campusrecruitmentsystem"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXWtWBzKaOJwk_t4oKifyodB4at2LV2Rw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

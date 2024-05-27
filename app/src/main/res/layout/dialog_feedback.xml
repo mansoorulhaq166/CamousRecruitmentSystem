@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/bright_color"
+    android:padding="@dimen/_16sdp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/seoul_hangang_cb"
+        android:gravity="center"
+        android:text="Give Feedback"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_20ssp"
+        android:textStyle="bold" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textCommentsLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16sdp"
+        app:boxStrokeColor="@color/white"
+        app:boxStrokeWidthFocused="@dimen/_2sdp"
+        app:hintTextColor="@color/white">
+
+        <EditText
+            android:id="@+id/editTextFeedback"
+            style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/seoul_hangang_cb"
+            android:hint="Enter your feedback"
+            android:importantForAutofill="no"
+            android:inputType="textNoSuggestions"
+            android:shadowColor="@color/white"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="bold" />
+    </com.google.android.material.textfield.TextInputLayout>
+</LinearLayout>

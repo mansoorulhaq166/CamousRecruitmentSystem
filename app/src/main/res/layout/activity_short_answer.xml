@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_color"
+    android:padding="@dimen/_8sdp"
+    tools:context=".ui.recruiter.test.ShortAnswerActivity">
+
+    <TextView
+        android:id="@+id/btn_save_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/apply_job_bg"
+        android:paddingHorizontal="@dimen/_16sdp"
+        android:paddingVertical="@dimen/_4sdp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="Save Test"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_16ssp"
+        android:textStyle="bold" />
+
+    <!-- RecyclerView to display questions -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_questions"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btn_add_question"
+        android:layout_below="@id/btn_save_test"
+        android:layout_marginVertical="@dimen/_8sdp" />
+
+    <!-- Add Question Button -->
+    <TextView
+        android:id="@+id/btn_add_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/apply_job_bg"
+        android:paddingHorizontal="@dimen/_16sdp"
+        android:paddingVertical="@dimen/_4sdp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="Add Question"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_16ssp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

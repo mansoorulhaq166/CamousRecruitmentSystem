@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_4sdp"
+    android:backgroundTint="@color/button_color"
+    app:cardCornerRadius="@dimen/_10sdp"
+    app:cardElevation="@dimen/_4sdp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/_16sdp">
+
+        <!-- Test Name -->
+        <TextView
+            android:id="@+id/textTestName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/seoul_hangang_cb"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_16ssp"
+            android:textStyle="bold" />
+
+        <!-- Test Type -->
+        <TextView
+            android:id="@+id/textTestType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:alpha="0.7"
+            android:fontFamily="@font/seoul_hangang_cb"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_14ssp" />
+
+        <!-- Test Duration -->
+        <TextView
+            android:id="@+id/textTestTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:alpha="0.7"
+            android:fontFamily="@font/seoul_hangang_cb"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_12ssp" />
+
+        <!-- Job Details -->
+        <TextView
+            android:id="@+id/textJobDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:fontFamily="@font/seoul_hangang_cb"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="bold" />
+
+        <!-- Start Test Button -->
+        <TextView
+            android:id="@+id/btnStartTest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:background="@drawable/sign_up_bg"
+            android:fontFamily="@font/seoul_hangang_cb"
+            android:paddingHorizontal="@dimen/_16sdp"
+            android:paddingVertical="@dimen/_8sdp"
+            android:text="Start Test"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_16ssp"
+            android:textStyle="bold" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

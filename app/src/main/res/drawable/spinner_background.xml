@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="8dp" />
+            <solid android:color="#E0E0E0" />
+        </shape>
+    </item>
+
+    <!-- Spinner arrow (default spinner drawable) -->
+    <item android:right="12dp" android:left="12dp">
+        <layer-list>
+            <item android:drawable="@android:drawable/spinner_background" />
+        </layer-list>
+    </item>
+
+</layer-list>

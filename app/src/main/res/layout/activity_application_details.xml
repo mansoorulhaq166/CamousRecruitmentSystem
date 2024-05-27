@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_color"
+    android:fillViewport="true"
+    tools:context=".ui.recruiter.application.ApplicationDetailsActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/rl_application_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/button_color"
+            android:padding="@dimen/_8sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/seoul_hangang_cb"
+                android:text="Application Details"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_20ssp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/back_app_details"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:contentDescription="@string/image_description"
+                android:src="@drawable/baseline_arrow_back_ios_24" />
+
+            <ImageView
+                android:id="@+id/img_check_application"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:contentDescription="@string/image_description"
+                android:src="@drawable/baseline_check_light" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rl_application_details"
+            android:padding="@dimen/_10sdp">
+
+            <TextView
+                android:id="@+id/textViewApplicantDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Applicant Details: "
+                android:textColor="#00ff00"
+                android:textSize="@dimen/_20ssp"
+                android:textStyle="bold" />
+
+            <!-- Name -->
+            <TextView
+                android:id="@+id/textViewName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewApplicantDetails"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/seoul_hangang_cb"
+                android:text="Name: John Doe"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16ssp"
+                android:textStyle="bold" />
+
+            <!-- Contact Information -->
+            <TextView
+                android:id="@+id/textViewContactNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewName"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/seoul_hangang_cb"
+                android:text="Contact Information: john.doe@example.com"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16ssp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/textViewContactEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewContactNumber"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/seoul_hangang_cb"
+                android:text="Contact Information: john.doe@example.com"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16ssp"
+                android:textStyle="bold" />
+
+            <!-- Additional Documents -->
+            <RelativeLayout
+                android:id="@+id/download_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewContactEmail"
+                android:layout_marginTop="@dimen/_8sdp">
+
+                <ProgressBar
+                    android:id="@+id/downloadProgressbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/_16sdp"
+                    android:indeterminateTint="@color/white"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/textViewAdditionalDocs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:background="@drawable/login_bg"
+                    android:fontFamily="@font/seoul_hangang_cb"
+                    android:paddingHorizontal="@dimen/_16sdp"
+                    android:paddingVertical="@dimen/_8sdp"
+                    android:text="Download Resume"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12ssp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <!-- Job Application Details Section -->
+            <TextView
+                android:id="@+id/textViewJobAppDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/download_layout"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Job Application Details: "
+                android:textColor="#00ff00"
+                android:textSize="@dimen/_20ssp"
+                android:textStyle="bold" />
+
+            <!-- Application Date -->
+            <TextView
+                android:id="@+id/textViewApplicationDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewJobAppDetails"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/seoul_hangang_cb"
+                android:text="Date"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16ssp"
+                android:textStyle="bold" />
+
+            <!-- Application Status -->
+            <TextView
+                android:id="@+id/textViewAppStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewApplicationDate"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/seoul_hangang_cb"
+                android:text="Status: Pending"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16ssp"
+                android:textStyle="bold" />
+
+            <!-- Notes or Comments -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textCommentsLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewAppStatus"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:boxStrokeColor="@color/white"
+                app:boxStrokeWidthFocused="@dimen/_2sdp"
+                app:hintTextColor="@color/white">
+
+                <EditText
+                    android:id="@+id/edTextComments"
+                    style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/seoul_hangang_cb"
+                    android:hint="Notes/Comments For Applicant"
+                    android:importantForAutofill="no"
+                    android:inputType="textNoSuggestions"
+                    android:shadowColor="@color/white"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="bold" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Internal Notes -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/internalNotesLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textCommentsLayout"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:boxStrokeColor="@color/white"
+                app:boxStrokeWidthFocused="@dimen/_2sdp"
+                app:hintTextColor="@color/white">
+
+                <EditText
+                    android:id="@+id/edTextInternalNotes"
+                    style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/seoul_hangang_cb"
+                    android:hint="Internal Notes:"
+                    android:importantForAutofill="no"
+                    android:inputType="textNoSuggestions"
+                    android:shadowColor="@color/white"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="bold" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Interview Schedule and Feedback -->
+            <TextView
+                android:id="@+id/scheduleInterview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/internalNotesLayout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:background="@drawable/login_bg"
+                android:fontFamily="@font/seoul_hangang_cb"
+                android:paddingHorizontal="@dimen/_16sdp"
+                android:paddingVertical="@dimen/_8sdp"
+                android:text="Schedule Interview"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16ssp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/radioGroupInterviewConducted"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/scheduleInterview"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radioButtonYes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/seoul_hangang_cb"
+                    android:paddingHorizontal="@dimen/_4sdp"
+                    android:text="Interview Conducted"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12ssp" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/seoul_hangang_cb"
+                    android:paddingHorizontal="@dimen/_4sdp"
+                    android:text="Not Conducted"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12ssp" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/interviewDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/scheduleInterview"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/seoul_hangang_cb"
+                android:text="Interview Date: "
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/statusTextRejected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_10sdp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:text="Application Rejected"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_16ssp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/generate_offer_letter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/login_bg"
+                    android:fontFamily="@font/seoul_hangang_cb"
+                    android:paddingHorizontal="@dimen/_32sdp"
+                    android:paddingVertical="@dimen/_8sdp"
+                    android:text="Generate Offer Letter"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_16ssp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_offer_letter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/send_offer_letter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/login_bg"
+                        android:fontFamily="@font/seoul_hangang_cb"
+                        android:paddingHorizontal="@dimen/_16sdp"
+                        android:paddingVertical="@dimen/_8sdp"
+                        android:text="Send Offer Letter"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/download_offer_letter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:background="@drawable/login_bg"
+                        android:fontFamily="@font/seoul_hangang_cb"
+                        android:paddingHorizontal="@dimen/_16sdp"
+                        android:paddingVertical="@dimen/_8sdp"
+                        android:text="Download Offer Letter"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/generate_offer_letter_again"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:fontFamily="@font/seoul_hangang_cb"
+                    android:gravity="center"
+                    android:text="Generate Offer Letter Again"
+                    android:textSize="@dimen/_12ssp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/offer_letter_progressbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:indeterminateTint="@color/white"
+                android:visibility="gone" />
+
+            <!-- Action Buttons -->
+            <LinearLayout
+                android:id="@+id/ll_action_buttons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/btnReject"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@drawable/login_bg"
+                    android:backgroundTint="#ff0000"
+                    android:fontFamily="@font/seoul_hangang_cb"
+                    android:gravity="center"
+                    android:paddingVertical="@dimen/_8sdp"
+                    android:text="Reject"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_16ssp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/btnAccept"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/login_bg"
+                    android:backgroundTint="#00ff00"
+                    android:fontFamily="@font/seoul_hangang_cb"
+                    android:gravity="center"
+                    android:paddingVertical="@dimen/_8sdp"
+                    android:text="Accept"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_16ssp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+</ScrollView>
