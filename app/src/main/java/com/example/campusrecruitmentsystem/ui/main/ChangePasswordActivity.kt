@@ -39,10 +39,14 @@ class ChangePasswordActivity : AppCompatActivity() {
             )
         ) {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+            binding.progressBar.visibility = View.GONE
+            binding.btnSavePassword.visibility = View.VISIBLE
             return
         }
         if (newPassword != confirmNewPassword) {
             Toast.makeText(this, "New passwords do not match", Toast.LENGTH_SHORT).show()
+            binding.progressBar.visibility = View.GONE
+            binding.btnSavePassword.visibility = View.VISIBLE
             return
         }
 

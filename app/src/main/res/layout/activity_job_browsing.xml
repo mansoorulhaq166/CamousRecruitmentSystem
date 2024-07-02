@@ -63,6 +63,17 @@
         android:layout_below="@id/rl_top_browse"
         android:padding="@dimen/_8sdp" />
 
+    <TextView
+        android:id="@+id/textViewNoJobs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="No Jobs to browse Yet."
+        android:textColor="@color/white"
+        android:textSize="@dimen/_22ssp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
@@ -72,15 +83,4 @@
         android:indeterminateTint="@color/white"
         android:indeterminateTintMode="src_atop"
         android:visibility="visible" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/filter_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="@dimen/_16sdp"
-        android:importantForAccessibility="no"
-        android:src="@drawable/baseline_filter_list_24"
-        android:visibility="gone" />
 </RelativeLayout>

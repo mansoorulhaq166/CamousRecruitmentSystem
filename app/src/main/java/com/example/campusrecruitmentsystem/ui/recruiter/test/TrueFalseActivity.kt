@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.campusrecruitmentsystem.adapters.test.TrueFalseAdapter
 import com.example.campusrecruitmentsystem.databinding.ActivityTrueFalseBinding
+import com.example.campusrecruitmentsystem.models.recruiter.TestTrueFalse
+import com.example.campusrecruitmentsystem.models.recruiter.TrueFalseQuestion
 import com.example.campusrecruitmentsystem.ui.main.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -14,7 +16,7 @@ import com.google.firebase.database.FirebaseDatabase
 
 class TrueFalseActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTrueFalseBinding
-    private val questionsList = mutableListOf<String>()
+    private val questionsList = mutableListOf<TrueFalseQuestion>()
     private lateinit var trueFalseAdapter: TrueFalseAdapter
     private lateinit var database: DatabaseReference
     private lateinit var auth: FirebaseAuth
@@ -57,14 +59,15 @@ class TrueFalseActivity : AppCompatActivity() {
         val userId = auth.currentUser?.uid
         val creationTime = System.currentTimeMillis()
         val testType = "True/False"
-        val test = mapOf(
-            "userId" to userId,
-            "creationTime" to creationTime,
-            "jobId" to testJob,
-            "testName" to testName,
-            "testTime" to testTime,
-            "testType" to testType,
-            "questions" to trueFalseAdapter.getQuestions()
+        val trueFalseQuestions = trueFalseAdapter.getQuestions()
+        val test = TestTrueFalse(
+            userId = userId,
+            creationTime = creationTime,
+            jobId = testJob,
+            testName = testName,
+            testTime = testTime,
+            testType = testType,
+            questions = trueFalseQuestions
         )
 
         if (questions.isEmpty()) {

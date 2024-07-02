@@ -265,6 +265,7 @@
                     android:id="@+id/submit_application_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_32sdp"
                     android:background="@drawable/main_button_bg"

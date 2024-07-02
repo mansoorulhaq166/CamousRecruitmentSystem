@@ -5,10 +5,7 @@ import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.campusrecruitmentsystem.R
@@ -189,27 +186,5 @@ class JobDetailsActivity : AppCompatActivity() {
                 Log.e("TAG", "Failed to read student application data.", error.toException())
             }
         })
-    }
-
-    private fun showCustomApplicationSubmissionDialog() {
-        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_apply_submission, null)
-
-        val alertDialogBuilder = AlertDialog.Builder(this)
-        alertDialogBuilder.setView(dialogView)
-
-        val alertDialog = alertDialogBuilder.create()
-        val btnUploadNow = dialogView.findViewById<TextView>(R.id.button_upload)
-        val btnCancel = dialogView.findViewById<TextView>(R.id.button_cancel)
-
-        btnUploadNow.setOnClickListener {
-//            chooseResumeFile()
-            alertDialog.dismiss()
-        }
-
-        btnCancel.setOnClickListener {
-            alertDialog.dismiss()
-        }
-
-        alertDialog.show()
     }
 }

@@ -74,7 +74,6 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/shortAnswerLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_16sdp"
@@ -86,13 +85,13 @@
 
                 <EditText
                     android:id="@+id/editTextShortAnswer"
-                    style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_150sdp"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="Answer"
+                    android:gravity="start"
                     android:importantForAutofill="no"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     android:shadowColor="@color/white"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_14ssp"

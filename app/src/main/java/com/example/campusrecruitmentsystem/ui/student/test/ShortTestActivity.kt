@@ -3,6 +3,8 @@ package com.example.campusrecruitmentsystem.ui.student.test
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.text.Editable
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -20,12 +22,15 @@ import com.google.firebase.database.ValueEventListener
 import java.util.Locale
 
 class ShortTestActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityShortTestBinding
     private lateinit var databaseReference: DatabaseReference
     private var testId: String? = null
     private var currentQuestionNumber = 1
     private lateinit var auth: FirebaseAuth
     private var userResponses: MutableList<String> = mutableListOf()
+    private var isActivityRunning = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityShortTestBinding.inflate(layoutInflater)
@@ -54,6 +59,7 @@ class ShortTestActivity : AppCompatActivity() {
         )
         binding.answer1.setBackgroundResource(R.drawable.b)
         binding.answer2.setBackgroundResource(R.drawable.b)
+
         binding.radioGroupTrueFalse.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 -1 -> {
@@ -69,6 +75,7 @@ class ShortTestActivity : AppCompatActivity() {
                             R.color.white
                         )
                     )
+
                     binding.answer1.setBackgroundResource(R.drawable.b)
                     binding.answer2.setBackgroundResource(R.drawable.b)
                 }
@@ -106,43 +113,9 @@ class ShortTestActivity : AppCompatActivity() {
                     binding.answer1.setBackgroundResource(R.drawable.b)
                     binding.answer2.setBackgroundResource(R.drawable.a)
                 }
-
-                R.id.answer3 -> {
-                    binding.answer1.setTextColor(
-                        ContextCompat.getColor(
-                            this@ShortTestActivity,
-                            R.color.white
-                        )
-                    )
-                    binding.answer2.setTextColor(
-                        ContextCompat.getColor(
-                            this@ShortTestActivity,
-                            R.color.white
-                        )
-                    )
-                    binding.answer1.setBackgroundResource(R.drawable.b)
-                    binding.answer2.setBackgroundResource(R.drawable.b)
-                }
-
-                R.id.answer4 -> {
-                    binding.answer1.setTextColor(
-                        ContextCompat.getColor(
-                            this@ShortTestActivity,
-                            R.color.white
-                        )
-                    )
-                    binding.answer2.setTextColor(
-                        ContextCompat.getColor(
-                            this@ShortTestActivity,
-                            R.color.white
-                        )
-                    )
-                    binding.answer1.setBackgroundResource(R.drawable.b)
-                    binding.answer2.setBackgroundResource(R.drawable.b)
-                }
             }
         }
-
+        
     }
 
     private fun fetchTestData(testId: String?) {
@@ -151,7 +124,7 @@ class ShortTestActivity : AppCompatActivity() {
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         if (dataSnapshot.exists()) {
-                            val test = dataSnapshot.getValue(TestTrueFalse::class.java)
+                            val test: TestTrueFalse? = dataSnapshot.getValue(TestTrueFalse::class.java)
                             // Process the fetched test data
                             test?.let {
                                 val totalQuestions = test.questions?.size ?: 0
@@ -164,16 +137,32 @@ class ShortTestActivity : AppCompatActivity() {
 
                                 displayQuestion(test, currentQuestionNumber)
 
-                                if (currentQuestionNumber == totalQuestions) {
-                                    binding.submit.text = "Submit"
-                                } else {
-                                    binding.submit.text = "Next"
-                                }
-
                                 binding.submit.setOnClickListener {
-                                    val currentResponse = getUserResponse()
+                                    val currentResponse = getUserResponse(test)
                                     if (currentResponse != null) {
                                         userResponses.add(currentResponse)
+                                        if (currentQuestionNumber >= totalQuestions - 1) {
+                                            binding.submit.text = "Submit"
+                                        } else {
+                                            binding.submit.text = "Next"
+                                        }
+
+                                        binding.editTextShortAnswer.text = Editable.Factory.getInstance().newEditable("")
+                                        binding.radioGroupTrueFalse.check(-1)
+                                        binding.answer1.setTextColor(
+                                            ContextCompat.getColor(
+                                                this@ShortTestActivity,
+                                                R.color.white
+                                            )
+                                        )
+                                        binding.answer2.setTextColor(
+                                            ContextCompat.getColor(
+                                                this@ShortTestActivity,
+                                                R.color.white
+                                            )
+                                        )
+                                        binding.answer1.setBackgroundResource(R.drawable.b)
+                                        binding.answer2.setBackgroundResource(R.drawable.b)
                                     } else {
                                         Toast.makeText(
                                             this@ShortTestActivity,
@@ -187,8 +176,7 @@ class ShortTestActivity : AppCompatActivity() {
                                         // Increment current question number
                                         currentQuestionNumber++
                                         displayQuestion(test, currentQuestionNumber)
-                                        binding.questionNumber.text =
-                                            currentQuestionNumber.toString()
+                                        binding.questionNumber.text = "$currentQuestionNumber. "
                                     } else {
                                         // Last question reached, submit the test
                                         submitTest(testId, userResponses)
@@ -223,21 +211,39 @@ class ShortTestActivity : AppCompatActivity() {
         }
     }
 
-    private fun getUserResponse(): String? {
-        val selectedRadioButtonId = binding.radioGroupTrueFalse.checkedRadioButtonId
-        return when (selectedRadioButtonId) {
-            R.id.answer1 -> binding.answer1.text.toString()
-            R.id.answer2 -> binding.answer2.text.toString()
-            else -> null // No option selected
+    private fun getUserResponse(test: TestTrueFalse): String? {
+        val type = test.testType
+        return if (type == "True/False") {
+            val selectedRadioButtonId = binding.radioGroupTrueFalse.checkedRadioButtonId
+            when (selectedRadioButtonId) {
+                R.id.answer1 -> binding.answer1.text.toString()
+                R.id.answer2 -> binding.answer2.text.toString()
+                else -> null // No option selected
+            }
+        } else {
+            binding.editTextShortAnswer.text.toString().trim()
         }
     }
 
     private fun displayQuestion(test: TestTrueFalse, questionNumber: Int) {
-        val question = test.questions?.getOrNull(questionNumber - 1) // Adjust index
-        question?.let {
-            binding.question.text = it.question
-            binding.answer1.text = "True"
-            binding.answer2.text = "False"
+        val type = test.testType
+        if (type == "True/False") {
+            binding.radioGroupTrueFalse.visibility = View.VISIBLE
+            binding.shortAnswerLayout.visibility = View.GONE
+
+            val question = test.questions?.getOrNull(questionNumber - 1) // Adjust index
+            question?.let {
+                binding.question.text = it.question
+                binding.answer1.text = "True"
+                binding.answer2.text = "False"
+            }
+        } else {
+            binding.radioGroupTrueFalse.visibility = View.GONE
+            binding.shortAnswerLayout.visibility = View.VISIBLE
+            val question = test.questions?.getOrNull(questionNumber - 1) // Adjust index
+            question?.let {
+                binding.question.text = it.question
+            }
         }
     }
 
@@ -286,7 +292,7 @@ class ShortTestActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                // Timer finished, handle accordingly
+                if (!isActivityRunning) return
                 binding.timer.text = "00:00"
 
                 if (userResponses.isNotEmpty()) {
@@ -317,5 +323,8 @@ class ShortTestActivity : AppCompatActivity() {
             }
         }.start()
     }
-
+    override fun onDestroy() {
+        super.onDestroy()
+        isActivityRunning = false
+    }
 }

@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
                     when (snapshot.child("role").getValue(String::class.java)) {
                         "Recruiter" -> {
                             binding.buttonPostJob.visibility = View.VISIBLE
-                            binding.buttonJobsPosted.visibility = View.VISIBLE
+                            binding.buttonJobsPosted.visibility = View.GONE
                             binding.buttonApplications.visibility = View.VISIBLE
                             binding.buttonTestManagement.visibility = View.VISIBLE
                             binding.buttonBrowseJobs.visibility = View.GONE
@@ -76,7 +76,6 @@ class MainActivity : AppCompatActivity() {
                             binding.buttonBrowseJobs.visibility = View.VISIBLE
                             binding.buttonTakeTest.visibility = View.VISIBLE
                             binding.buttonAppliedJobs.visibility = View.VISIBLE
-                            binding.imgNotification.visibility = View.GONE
                         }
                     }
                 }

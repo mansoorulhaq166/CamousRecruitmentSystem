@@ -1,5 +1,7 @@
 package com.example.campusrecruitmentsystem.adapters.test
 
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.campusrecruitmentsystem.R
 import com.example.campusrecruitmentsystem.models.recruiter.MultipleChoiceQuestion
+
 
 class MultipleChoiceAdapter(private val questions: MutableList<MultipleChoiceQuestion>) :
     RecyclerView.Adapter<MultipleChoiceAdapter.ViewHolder>() {
@@ -42,22 +45,50 @@ class MultipleChoiceAdapter(private val questions: MutableList<MultipleChoiceQue
         holder.questionChoice3.setText(question.choiceC)
         holder.questionChoice4.setText(question.choiceD)
 
-        holder.questionText.setOnFocusChangeListener { _, _ ->
-            questions[position].question = holder.questionText.text.toString()
-        }
+        holder.questionText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                questions[position].question = s.toString()
+            }
 
-        holder.questionChoice1.setOnFocusChangeListener { _, _ ->
-            questions[position].choiceA = holder.questionChoice1.text.toString()
-        }
-        holder.questionChoice2.setOnFocusChangeListener { _, _ ->
-            questions[position].choiceB = holder.questionChoice2.text.toString()
-        }
-        holder.questionChoice3.setOnFocusChangeListener { _, _ ->
-            questions[position].choiceC = holder.questionChoice3.text.toString()
-        }
-        holder.questionChoice4.setOnFocusChangeListener { _, _ ->
-            questions[position].choiceD = holder.questionChoice4.text.toString()
-        }
+            override fun afterTextChanged(s: Editable) {}
+        })
+
+        holder.questionChoice1.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                questions[position].choiceA = s.toString()
+            }
+
+            override fun afterTextChanged(s: Editable) {}
+        })
+
+        holder.questionChoice2.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                questions[position].choiceB = s.toString()
+            }
+
+            override fun afterTextChanged(s: Editable) {}
+        })
+
+        holder.questionChoice3.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                questions[position].choiceC = s.toString()
+            }
+
+            override fun afterTextChanged(s: Editable) {}
+        })
+
+        holder.questionChoice4.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                questions[position].choiceD = s.toString()
+            }
+
+            override fun afterTextChanged(s: Editable) {}
+        })
 
         when (question.correctChoice) {
             1 -> {

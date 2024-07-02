@@ -31,8 +31,6 @@ class JobApplyingActivity : AppCompatActivity() {
     private var job: Job? = null
     private lateinit var auth: FirebaseAuth
     private lateinit var userName: String
-    private lateinit var userEmail: String
-    private lateinit var userPhone: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityJobApplyingBinding.inflate(layoutInflater)

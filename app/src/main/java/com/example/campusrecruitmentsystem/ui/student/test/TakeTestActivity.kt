@@ -64,10 +64,15 @@ class TakeTestActivity : AppCompatActivity() {
                     adapter.clearData()
                     adapter.addAllData(tests)
 
-                    binding.progressBar.visibility = if (tests.isNotEmpty()) View.GONE else View.VISIBLE
-                    binding.recyclerViewTests.visibility = if (tests.isNotEmpty()) View.VISIBLE else View.GONE
-                    binding.textViewEmpty.visibility = if (tests.isEmpty()) View.VISIBLE else View.GONE
-
+                    if (tests.isEmpty()) {
+                        binding.textViewEmpty.visibility = View.VISIBLE
+                        binding.progressBar.visibility = View.GONE
+                        binding.recyclerViewTests.visibility = View.GONE
+                    } else {
+                        binding.textViewEmpty.visibility = View.GONE
+                        binding.progressBar.visibility = View.GONE
+                        binding.recyclerViewTests.visibility = View.VISIBLE
+                    }
                 }
             }
 
@@ -75,6 +80,7 @@ class TakeTestActivity : AppCompatActivity() {
                 Toast.makeText(this@TakeTestActivity, databaseError.message, Toast.LENGTH_SHORT)
                     .show()
                 binding.progressBar.visibility = View.GONE
+                binding.textViewEmpty.visibility = View.VISIBLE
             }
         })
     }

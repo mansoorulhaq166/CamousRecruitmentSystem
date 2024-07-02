@@ -1,6 +1,7 @@
 package com.example.campusrecruitmentsystem.ui.recruiter.application
 
 import android.Manifest
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
@@ -12,6 +13,7 @@ import android.text.TextWatcher
 import android.text.style.ForegroundColorSpan
 import android.text.style.UnderlineSpan
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
@@ -108,81 +110,227 @@ class ApplicationDetailsActivity : AppCompatActivity() {
         binding.generateOfferLetter.visibility = View.GONE
         binding.statusTextRejected.visibility = View.GONE
 
-        val applicationRef =
-            FirebaseDatabase.getInstance().getReference("applications").child(applicationId)
-        applicationRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(applicationSnapshot: DataSnapshot) {
-                // Retrieve student ID and job ID from the application
-                val studentId =
-                    applicationSnapshot.child("studentId").getValue(String::class.java).toString()
-                val jobId =
-                    applicationSnapshot.child("jobId").getValue(String::class.java).toString()
+        // Inflate the custom dialog layout
 
-                // Retrieve student details
-                val studentRef =
-                    FirebaseDatabase.getInstance().getReference("users").child(studentId)
-                studentRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onDataChange(studentSnapshot: DataSnapshot) {
-                        val studentName =
-                            studentSnapshot.child("name").getValue(String::class.java).toString()
-//                        val studentEmail =
-//                            studentSnapshot.child("email").getValue(String::class.java).toString()
+        // Inflate the custom dialog layout
+        val inflater = LayoutInflater.from(this)
+        val dialogView: View = inflater.inflate(R.layout.dialog_offer_letter_details, null)
 
-                        // Retrieve job details
-                        val jobRef =
-                            FirebaseDatabase.getInstance().getReference("jobs").child(jobId)
-                        jobRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                            override fun onDataChange(jobSnapshot: DataSnapshot) {
-                                val jobRole =
-                                    jobSnapshot.child("title").getValue(String::class.java)
-                                val salary =
-                                    jobSnapshot.child("salary").getValue(String::class.java)
-
-                                // Step 2: Fill offer letter template with retrieved data
-                                val offerLetterContent = """
-                                     Dear $studentName,
-
-                                     Congratulations! We are pleased to offer you the position of $jobRole with our company.
-                                     
-                                     Salary: $salary
-                                     
-                                      Please find attached the detailed offer letter.
-                                      
-                                                                                Best Regards,
-                                                                              Recruitment Team
-                                      """.trimIndent()
-                                createOfferLetterFile(
-                                    studentName,
-                                    offerLetterContent,
-                                    applicationSnapshot
-                                )
-                            }
-
-                            override fun onCancelled(error: DatabaseError) {
-                                Log.e("Firebase", "Error retrieving job details: ${error.message}")
-                                binding.offerLetterProgressbar.visibility = View.GONE
-                                binding.generateOfferLetter.visibility = View.VISIBLE
-                                binding.statusTextRejected.visibility = View.VISIBLE
-                            }
-                        })
-                    }
-
-                    override fun onCancelled(error: DatabaseError) {
-                        Log.e("Firebase", "Error retrieving student details: ${error.message}")
-                        binding.offerLetterProgressbar.visibility = View.GONE
-                        binding.generateOfferLetter.visibility = View.VISIBLE
-                        binding.statusTextRejected.visibility = View.VISIBLE
-                    }
-                })
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.e("Firebase", "Error retrieving application details: ${error.message}")
+        val builder = AlertDialog.Builder(this)
+        builder.setView(dialogView)
+            .setTitle("Enter Offer Letter Details")
+            .setPositiveButton("Generate", null)
+            .setNegativeButton("Cancel") { dialog: DialogInterface, which: Int ->
                 binding.offerLetterProgressbar.visibility = View.GONE
                 binding.generateOfferLetter.visibility = View.VISIBLE
                 binding.statusTextRejected.visibility = View.VISIBLE
+                dialog.dismiss()
             }
-        })
+
+        val dialog = builder.create()
+        dialog.show()
+
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+            val departmentNameEditText = dialogView.findViewById<EditText>(R.id.department_name)
+            val companyLocationEditText = dialogView.findViewById<EditText>(R.id.company_location)
+            val managerNameEditText = dialogView.findViewById<EditText>(R.id.manager_name)
+            val bonusDetailsEditText = dialogView.findViewById<EditText>(R.id.bonus_details)
+            val benefitsEditText = dialogView.findViewById<EditText>(R.id.benefits)
+            val paidTimeOffEditText = dialogView.findViewById<EditText>(R.id.paid_time_off)
+            val startDateEditText = dialogView.findViewById<EditText>(R.id.start_date)
+            val acceptanceDeadlineEditText =
+                dialogView.findViewById<EditText>(R.id.acceptance_deadline)
+            val contactPersonNameEditText =
+                dialogView.findViewById<EditText>(R.id.contact_person_name)
+            val contactPersonEmailEditText =
+                dialogView.findViewById<EditText>(R.id.contact_person_email)
+
+            val departmentName = departmentNameEditText.getText().toString().trim { it <= ' ' }
+            val companyLocation = companyLocationEditText.getText().toString().trim { it <= ' ' }
+            val managerName = managerNameEditText.getText().toString().trim { it <= ' ' }
+            val bonusDetails = bonusDetailsEditText.getText().toString().trim { it <= ' ' }
+            val benefits = benefitsEditText.getText().toString().trim { it <= ' ' }
+            val paidTimeOff = paidTimeOffEditText.getText().toString().trim { it <= ' ' }
+            val startDate = startDateEditText.getText().toString().trim { it <= ' ' }
+            val acceptanceDeadline =
+                acceptanceDeadlineEditText.getText().toString().trim { it <= ' ' }
+            val contactPersonName =
+                contactPersonNameEditText.getText().toString().trim { it <= ' ' }
+            val contactPersonEmail =
+                contactPersonEmailEditText.getText().toString().trim { it <= ' ' }
+
+            var hasError = false
+
+            if (departmentName.isEmpty()) {
+                departmentNameEditText.error = "Department Name is required"
+                hasError = true
+            }
+
+            if (companyLocation.isEmpty()) {
+                companyLocationEditText.error = "Company Location is required"
+                hasError = true
+            }
+
+            if (startDate.isEmpty()) {
+                startDateEditText.error = "Start Date is required"
+                hasError = true
+            }
+
+            if (acceptanceDeadline.isEmpty()) {
+                acceptanceDeadlineEditText.error = "Acceptance Deadline is required"
+                hasError = true
+            }
+
+            if (contactPersonName.isEmpty()) {
+                contactPersonNameEditText.error = "Contact Person's Name is required"
+                hasError = true
+            }
+
+            if (contactPersonEmail.isEmpty()) {
+                contactPersonEmailEditText.error = "Contact Person's Email/Phone Number is required"
+                hasError = true
+            }
+
+            if (hasError) {
+                return@setOnClickListener
+            }
+
+            val applicationRef =
+                FirebaseDatabase.getInstance().getReference("applications").child(applicationId)
+            applicationRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(applicationSnapshot: DataSnapshot) {
+                    // Retrieve student ID and job ID from the application
+                    val studentId =
+                        applicationSnapshot.child("studentId").getValue(String::class.java)
+                            .toString()
+                    val jobId =
+                        applicationSnapshot.child("jobId").getValue(String::class.java).toString()
+
+                    // Retrieve student details
+                    val studentRef =
+                        FirebaseDatabase.getInstance().getReference("users").child(studentId)
+                    studentRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(studentSnapshot: DataSnapshot) {
+                            val studentName =
+                                studentSnapshot.child("name").getValue(String::class.java)
+                                    .toString()
+
+                            // Retrieve job details
+                            val jobRef =
+                                FirebaseDatabase.getInstance().getReference("jobs").child(jobId)
+                            jobRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                                override fun onDataChange(jobSnapshot: DataSnapshot) {
+                                    val jobRole =
+                                        jobSnapshot.child("title").getValue(String::class.java)
+                                    val salary =
+                                        jobSnapshot.child("salary").getValue(String::class.java)
+
+                                    val offerLetterContent = StringBuilder(
+                                        """Dear $studentName,
+
+We are delighted to extend this offer of employment for the position of $jobRole at our esteemed company. We are confident that your skills and experience will be a valuable asset to our team.
+
+Position Details:
+----------------------------------------
+Job Title: $jobRole
+"""
+                                    )
+
+                                    offerLetterContent.append("Department: ").append(departmentName)
+                                        .append("\n")
+                                    offerLetterContent.append("Location: ").append(companyLocation)
+                                        .append("\n")
+                                    if (!managerName.isEmpty()) {
+                                        offerLetterContent.append("Reporting To: ")
+                                            .append(managerName).append("\n")
+                                    }
+
+                                    offerLetterContent.append(
+                                        """
+
+                                                    Compensation and Benefits:
+                                                    ----------------------------------------
+                                                    Salary: 
+                                                    """.trimIndent()
+                                    ).append(salary).append(" per annum\n")
+
+                                    if (!bonusDetails.isEmpty()) {
+                                        offerLetterContent.append("Bonus: ").append(bonusDetails)
+                                            .append("\n")
+                                    }
+                                    if (!benefits.isEmpty()) {
+                                        offerLetterContent.append("Benefits: ").append(benefits)
+                                            .append("\n")
+                                    }
+                                    if (!paidTimeOff.isEmpty()) {
+                                        offerLetterContent.append("Paid Time Off (in days): ")
+                                            .append(paidTimeOff).append("\n")
+                                    }
+
+                                    offerLetterContent.append(
+                                        """
+
+                                                    Start Date:
+                                                    ----------------------------------------
+                                                    Your start date will be 
+                                                    """.trimIndent()
+                                    ).append(startDate)
+                                        .append(". Please confirm your acceptance of this offer by signing and returning the attached offer letter by ")
+                                        .append(acceptanceDeadline).append(
+                                            """
+                                                    .
+
+                                                    ----------------------------------------
+                                                    We believe that you will find working with our company to be a challenging and rewarding experience. We look forward to having you on our team and contributing to our mutual success.
+
+                                                    
+
+                                                    """.trimIndent()
+                                        )
+
+                                    offerLetterContent.append("If you have any questions or need additional information, please feel free to contact ")
+                                    offerLetterContent.append(contactPersonName)
+                                    offerLetterContent.append(" at ").append(contactPersonEmail)
+                                    offerLetterContent.append(".\n\n")
+                                    offerLetterContent.append("Thank You.\n\n")
+
+                                    dialog.dismiss()
+                                    createOfferLetterFile(
+                                        studentName,
+                                        offerLetterContent.toString(),
+                                        applicationSnapshot
+                                    )
+                                }
+
+                                override fun onCancelled(error: DatabaseError) {
+                                    Log.e(
+                                        "Firebase",
+                                        "Error retrieving job details: ${error.message}"
+                                    )
+                                    binding.offerLetterProgressbar.visibility = View.GONE
+                                    binding.generateOfferLetter.visibility = View.VISIBLE
+                                    binding.statusTextRejected.visibility = View.VISIBLE
+                                }
+                            })
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                            Log.e("Firebase", "Error retrieving student details: ${error.message}")
+                            binding.offerLetterProgressbar.visibility = View.GONE
+                            binding.generateOfferLetter.visibility = View.VISIBLE
+                            binding.statusTextRejected.visibility = View.VISIBLE
+                        }
+                    })
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e("Firebase", "Error retrieving application details: ${error.message}")
+                    binding.offerLetterProgressbar.visibility = View.GONE
+                    binding.generateOfferLetter.visibility = View.VISIBLE
+                    binding.statusTextRejected.visibility = View.VISIBLE
+                }
+            })
+        }
     }
 
     private fun createOfferLetterFile(
@@ -195,7 +343,6 @@ class ApplicationDetailsActivity : AppCompatActivity() {
 
         // Create a new document
         val doc = XWPFDocument()
-
 
         // Split the content into lines
         val lines = content.split("\n")
@@ -224,8 +371,6 @@ class ApplicationDetailsActivity : AppCompatActivity() {
                     applicationSnapshot.ref.child("offerLetterUrl").setValue(downloadUrl)
                     binding.offerLetterProgressbar.visibility = View.GONE
                     binding.llOfferLetter.visibility = View.VISIBLE
-//                    binding.generateOfferLetter.visibility = View.VISIBLE
-//                    binding.statusTextRejected.visibility = View.VISIBLE
                     showDownloadOrSendDialog(name, applicationSnapshot)
                 }.addOnFailureListener { exception ->
                     Log.e("Firebase", "Failed to get download URL: $exception")

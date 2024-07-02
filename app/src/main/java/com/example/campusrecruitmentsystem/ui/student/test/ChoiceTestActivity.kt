@@ -20,12 +20,15 @@ import com.google.firebase.database.ValueEventListener
 import java.util.Locale
 
 class ChoiceTestActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityStudentTestBinding
     private lateinit var databaseReference: DatabaseReference
     private var testId: String? = null
     private var currentQuestionNumber = 1
     private lateinit var auth: FirebaseAuth
     private var userResponses: MutableList<String> = mutableListOf()
+    private var isActivityRunning = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityStudentTestBinding.inflate(layoutInflater)
@@ -248,16 +251,44 @@ class ChoiceTestActivity : AppCompatActivity() {
 
                                 displayQuestion(test, currentQuestionNumber)
 
-                                if (currentQuestionNumber == totalQuestions) {
-                                    binding.submit.text = "Submit"
-                                } else {
-                                    binding.submit.text = "Next"
-                                }
-
                                 binding.submit.setOnClickListener {
                                     val currentResponse = getUserResponse()
                                     if (currentResponse != null) {
                                         userResponses.add(currentResponse)
+                                        if (currentQuestionNumber >= totalQuestions - 1) {
+                                            binding.submit.text = "Submit"
+                                        } else {
+                                            binding.submit.text = "Next"
+                                        }
+                                        binding.radioGroup.check(-1)
+                                        binding.answer1.setTextColor(
+                                            ContextCompat.getColor(
+                                                this@ChoiceTestActivity,
+                                                R.color.white
+                                            )
+                                        )
+                                        binding.answer2.setTextColor(
+                                            ContextCompat.getColor(
+                                                this@ChoiceTestActivity,
+                                                R.color.white
+                                            )
+                                        )
+                                        binding.answer3.setTextColor(
+                                            ContextCompat.getColor(
+                                                this@ChoiceTestActivity,
+                                                R.color.white
+                                            )
+                                        )
+                                        binding.answer4.setTextColor(
+                                            ContextCompat.getColor(
+                                                this@ChoiceTestActivity,
+                                                R.color.white
+                                            )
+                                        )
+                                        binding.answer1.setBackgroundResource(R.drawable.b)
+                                        binding.answer2.setBackgroundResource(R.drawable.b)
+                                        binding.answer3.setBackgroundResource(R.drawable.b)
+                                        binding.answer4.setBackgroundResource(R.drawable.b)
                                     } else {
                                         Toast.makeText(
                                             this@ChoiceTestActivity,
@@ -271,8 +302,7 @@ class ChoiceTestActivity : AppCompatActivity() {
                                         // Increment current question number
                                         currentQuestionNumber++
                                         displayQuestion(test, currentQuestionNumber)
-                                        binding.questionNumber.text =
-                                            currentQuestionNumber.toString()
+                                        binding.questionNumber.text = "$currentQuestionNumber. "
                                     } else {
                                         // Last question reached, submit the test
                                         submitTest(testId, userResponses)
@@ -280,11 +310,20 @@ class ChoiceTestActivity : AppCompatActivity() {
                                 }
 
                                 binding.finish.setOnClickListener {
-                                    val intent =
-                                        Intent(this@ChoiceTestActivity, MainActivity::class.java)
-                                    intent.flags =
-                                        Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                    startActivity(intent)
+                                    AlertDialog.Builder(this@ChoiceTestActivity)
+                                        .setTitle("Exit Test")
+                                        .setMessage("Are you sure you want to exit the test?")
+                                        .setPositiveButton("Yes") { dialog, _ ->
+                                            dialog.dismiss()
+                                            val intent = Intent(this@ChoiceTestActivity, MainActivity::class.java)
+                                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                            startActivity(intent)
+                                        }
+                                        .setNegativeButton("No") { dialog, _ ->
+                                            dialog.dismiss() // Just dismiss the dialog if the user chooses "No"
+                                        }
+                                        .setCancelable(false) // Ensure the dialog cannot be dismissed by tapping outside
+                                        .show()
                                 }
                             }
                         } else {
@@ -344,14 +383,18 @@ class ChoiceTestActivity : AppCompatActivity() {
         submissionId?.let {
             testSubmissionsRef.child(it).setValue(submissionData)
                 .addOnSuccessListener {
-                    Toast.makeText(
-                        this@ChoiceTestActivity,
-                        "Test Submitted Successfully",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    val intent = Intent(this@ChoiceTestActivity, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
+                    val builder = AlertDialog.Builder(this@ChoiceTestActivity)
+                    builder.setMessage("Test Submitted Successfully")
+                        .setPositiveButton("OK") { _, _ ->
+                            // Redirect to MainActivity after clicking "OK"
+                            val intent = Intent(this@ChoiceTestActivity, MainActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            startActivity(intent)
+                        }
+
+                    // Show the dialog
+                    val alert = builder.create()
+                    alert.show()
                 }
                 .addOnFailureListener { e ->
                     Toast.makeText(
@@ -374,7 +417,7 @@ class ChoiceTestActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                // Timer finished, handle accordingly
+                if (!isActivityRunning) return
                 binding.timer.text = "00:00"
 
                 if (userResponses.isNotEmpty()) {
@@ -404,5 +447,10 @@ class ChoiceTestActivity : AppCompatActivity() {
                 }
             }
         }.start()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        isActivityRunning = false
     }
 }

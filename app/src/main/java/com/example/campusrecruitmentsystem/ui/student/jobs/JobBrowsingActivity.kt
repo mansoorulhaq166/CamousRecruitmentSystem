@@ -49,6 +49,7 @@ class JobBrowsingActivity : AppCompatActivity(), OnItemClickListener {
         jobAdapter.setOnItemClickListener(this)
         retrieveJobsFromDatabase()
 
+        binding.backBrowseJobs.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
         binding.searchImg.setOnClickListener {
             toggleSearchBar()
         }
@@ -80,6 +81,11 @@ class JobBrowsingActivity : AppCompatActivity(), OnItemClickListener {
                     job?.let {
                         jobList.add(it)
                     }
+                }
+                if (jobList.isEmpty()) {
+                    binding.textViewNoJobs.visibility = View.VISIBLE
+                } else {
+                    binding.textViewNoJobs.visibility = View.GONE
                 }
                 jobList.reverse()
                 applyFilters(binding.editTextSearch.text.toString())

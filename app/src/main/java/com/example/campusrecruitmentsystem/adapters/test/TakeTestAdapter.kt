@@ -21,7 +21,6 @@ import java.util.Locale
 
 class TakeTestAdapter(private val context: Context, private val testList: MutableList<Test>) :
     RecyclerView.Adapter<TakeTestAdapter.ViewHolder>() {
-    private var itemClickListener: OnItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
@@ -51,10 +50,6 @@ class TakeTestAdapter(private val context: Context, private val testList: Mutabl
     fun addAllData(tests: List<Test>) {
         testList.addAll(tests)
         notifyDataSetChanged()
-    }
-
-    fun setOnItemClickListener(listener: OnItemClickListener) {
-        itemClickListener = listener
     }
 
     inner class ViewHolder(private val binding: ItemTakeTestBinding) :

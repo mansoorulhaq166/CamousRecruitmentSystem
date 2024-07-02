@@ -27,12 +27,12 @@ data class TestTrueFalse(
     val testTime: String? = "",
     val creationTime: Long? = 0,
     val testType: String? = "",
-    val recruiterId: String? = "",
+    val userId: String? = "",
     val jobId: String? = "",
     val questions: List<TrueFalseQuestion>? = null
 )
 
 data class TrueFalseQuestion(
     val questionNumber: Int? = 0,
-    val question: String? = ""
+    var question: String? = ""
 )

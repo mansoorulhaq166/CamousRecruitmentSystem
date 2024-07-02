@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/app_color">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/_8sdp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            app:boxStrokeColor="@color/white"
+            app:boxStrokeWidthFocused="@dimen/_2sdp"
+            app:hintTextColor="@color/white">
+
+            <EditText
+                android:id="@+id/department_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="Department Name"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:shadowColor="@color/white"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            app:boxStrokeColor="@color/white"
+            app:boxStrokeWidthFocused="@dimen/_2sdp"
+            app:hintTextColor="@color/white">
+
+            <EditText
+                android:id="@+id/company_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="Company Location"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:shadowColor="@color/white"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            app:boxStrokeColor="@color/white"
+            app:boxStrokeWidthFocused="@dimen/_2sdp"
+            app:hintTextColor="@color/white">
+
+            <EditText
+                android:id="@+id/manager_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="Manager's Name (Optional)"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:shadowColor="@color/white"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            app:boxStrokeColor="@color/white"
+            app:boxStrokeWidthFocused="@dimen/_2sdp"
+            app:hintTextColor="@color/white">
+
+            <EditText
+                android:id="@+id/bonus_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="Bonus Details (Optional)"
+                android:importantForAutofill="no"
+                android:inputType="textMultiLine"
+                android:shadowColor="@color/white"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            app:boxStrokeColor="@color/white"
+            app:boxStrokeWidthFocused="@dimen/_2sdp"
+            app:hintTextColor="@color/white">
+
+            <EditText
+                android:id="@+id/benefits"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="Benefits (Optional)"
+                android:importantForAutofill="no"
+                android:inputType="textMultiLine"
+                android:shadowColor="@color/white"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            app:boxStrokeColor="@color/white"
+            app:boxStrokeWidthFocused="@dimen/_2sdp"
+            app:hintTextColor="@color/white">
+
+            <EditText
+                android:id="@+id/paid_time_off"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="Paid Time Off (Optional)"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:shadowColor="@color/white"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            app:boxStrokeColor="@color/white"
+            app:boxStrokeWidthFocused="@dimen/_2sdp"
+            app:hintTextColor="@color/white">
+
+            <EditText
+                android:id="@+id/start_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="Start Date"
+                android:importantForAutofill="no"
+                android:inputType="datetime"
+                android:shadowColor="@color/white"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            app:boxStrokeColor="@color/white"
+            app:boxStrokeWidthFocused="@dimen/_2sdp"
+            app:hintTextColor="@color/white">
+
+            <EditText
+                android:id="@+id/acceptance_deadline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="Acceptance Deadline"
+                android:importantForAutofill="no"
+                android:inputType="date"
+                android:shadowColor="@color/white"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            app:boxStrokeColor="@color/white"
+            app:boxStrokeWidthFocused="@dimen/_2sdp"
+            app:hintTextColor="@color/white">
+
+            <EditText
+                android:id="@+id/contact_person_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="Contact Person's Name"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:shadowColor="@color/white"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            app:boxStrokeColor="@color/white"
+            app:boxStrokeWidthFocused="@dimen/_2sdp"
+            app:hintTextColor="@color/white">
+
+            <EditText
+                android:id="@+id/contact_person_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="Contact Person's Email/Phone Number"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress"
+                android:shadowColor="@color/white"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+</ScrollView>
