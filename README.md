@@ -16,7 +16,9 @@ The Camous Recruitment System is an Android application developed as part of a f
 ## Technologies Used
 
  **Language**: Kotlin
+ 
  **UI Framework**: XML
+ 
  **Database**: Firebase
 
 ## Usage
