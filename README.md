@@ -70,4 +70,4 @@ Contributions to the Camous Recruitment System are welcome. To contribute:
 
 For any inquiries or feedback, please reach out to:
 
-- **Mansoor Ul Haq**: [Email](mailto:mansoorulhaq@example.com)
+- **Mansoor Ul Haq**: [Email](mailto:mansoorulhaq166@gmail.com)
