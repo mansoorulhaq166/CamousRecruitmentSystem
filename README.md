@@ -37,37 +37,6 @@ The Camous Recruitment System is an Android application developed as part of a f
    - Apply for jobs.
    - View application status and notifications.
 
-## Contributing
-
-Contributions to the Camous Recruitment System are welcome. To contribute:
-
-1. **Fork the Repository**
-
-2. **Create a New Branch**
-
-   ```bash
-   git checkout -b feature/your-feature
-   ```
-
-3. **Make Your Changes**
-
-4. **Commit Your Changes**
-
-   ```bash
-   git commit -am 'Add new feature'
-   ```
-
-5. **Push to the Branch**
-
-   ```bash
-   git push origin feature/your-feature
-   ```
-
-6. **Create a Pull Request**
-
-   Go to the GitHub repository and create a pull request with a description of your changes.
-
-
 ## Contact
 
 For any inquiries or feedback, please reach out to:
