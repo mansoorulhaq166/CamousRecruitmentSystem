@@ -1,8 +1,8 @@
-# Camous Recruitment System
+# Campus Recruitment System
 
 ## Overview
 
-The Camous Recruitment System is an Android application developed as part of a final year project. This system is designed to facilitate the recruitment process for companies and candidates by providing a platform to manage job postings, applications, and recruitment workflows.
+The Campus Recruitment System is an Android application developed as part of a final year project. This system is designed to facilitate the recruitment process for companies and candidates by providing a platform to manage job postings, applications, and recruitment workflows.
 
 ## Features
 
